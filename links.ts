@@ -1,7 +1,7 @@
 // a list of hyperlinks to use at multiple places
 const links = {
-    discordInvite: "https://discord.gg/F2rmBJXytn",
-    donation: "https://discord.com/channels/1091348375301013615/shop",
+    discordInvite: "https://discord.gg/osmu",
+    donation: "https://getalby.com/p/osmu",
     gitEditBase: "https://github.com/RndUsername/osmu-wiki/edit/master"
 }
 
