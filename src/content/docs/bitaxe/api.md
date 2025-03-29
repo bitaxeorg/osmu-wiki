@@ -37,7 +37,7 @@ General Information about the Bitaxe can be gathered using the `/api/system/info
     "temp": 58.0,
     "vrTemp": 45,
     "maxPower": 40,
-    "nominalVoltage": 5,
+    "nominalVoltage": 12,
     "hashRate": 2372.7583341893742,
 	"bestDiff":	"4.29G",
 	"bestNonceDiff": 4292734826,
@@ -57,7 +57,7 @@ General Information about the Bitaxe can be gathered using the `/api/system/info
     "wifiRSSI":	-44,
     "apEnabled": 0,
     "sharesAccepted": 19739,
-    "sharesRejected": 0,
+    "sharesRejected": 6,
     "sharesRejectedReasons": [{
 			"message": "Above target",
 			"count": 6
