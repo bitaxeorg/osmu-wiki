@@ -42,7 +42,7 @@ General Information about the Bitaxe can be gathered using the `/api/system/info
     "bestDiff":	"4.29G",
     "bestNonceDiff": 4292734826,
     "bestSessionDiff": "3.83M",
-    "bestSessionNonceDiff":	3828108,
+    "bestSessionNonceDiff": 3828108,
     "stratumDiff": 1000,
     "isUsingFallbackStratum": 0,
     "isPSRAMAvailable":	1,
