@@ -39,13 +39,13 @@ General Information about the Bitaxe can be gathered using the `/api/system/info
     "maxPower": 40,
     "nominalVoltage": 12,
     "hashRate": 2372.7583341893742,
-	"bestDiff":	"4.29G",
-	"bestNonceDiff": 4292734826,
-	"bestSessionDiff": "3.83M",
-	"bestSessionNonceDiff":	3828108,
+    "bestDiff":	"4.29G",
+    "bestNonceDiff": 4292734826,
+    "bestSessionDiff": "3.83M",
+    "bestSessionNonceDiff":	3828108,
     "stratumDiff": 1000,
     "isUsingFallbackStratum": 0,
-	"isPSRAMAvailable":	1,
+    "isPSRAMAvailable":	1,
     "freeHeap": 178368,
     "coreVoltage": 1200,
     "coreVoltageActual": 1194,
@@ -83,7 +83,7 @@ General Information about the Bitaxe can be gathered using the `/api/system/info
     "invertfanpolarity": 1,
     "autofanspeed": 0,
     "fanspeed": 35,
-	"fanrpm": 5515
+    "fanrpm": 5515
 }
 ```
 
