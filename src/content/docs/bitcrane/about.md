@@ -11,12 +11,9 @@ discordChannel: https://discord.com/channels/1091348375301013615/117121107683521
 
 ## What is this?
 
-Introducing the Bitcrane. A quick tool to spit bytes at an Antminer hashboard over USB (and control fans & PSU).
+Introducing the Bitcrane. A tool to spit bytes at an Antminer hashboard over USB (and control fans & PSU).
 
-The Bitcrane is a Control board specifically designed and engineered to replace the propiotari control boards of Antminer miners.
-The Bitcrane does interact with hasboards over the standard serial cables and is been controlled via the USB-C connector and an Raspberry Pi (as an example).
-
-With the Bitcrane will you receive the control power back to you with the open source ethos in mind.
+The Bitcrane is useful for exploring and developing alternative Antminer firmware. It is not a drop-in controlboard replacement. The Bitcrane can be used with mining applications like [piaxe-miner](https://github.com/shufps/piaxe-miner) running on a PC or RPi, or you can write your own firmware in the language of your choice.
 
 ## 🛠️ Hardware
 
