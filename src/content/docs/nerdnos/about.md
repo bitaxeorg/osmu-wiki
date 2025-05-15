@@ -18,4 +18,4 @@ In order to stay performant and don't cosume too much power it's heavily undercl
 
 ### Software
 
-The Software is insallable via the bitaxe web flasher available ![here](https://flasher.bitaxe.org)
+The Software is insallable via the bitaxe web flasher available [here](https://flasher.bitaxe.org)
