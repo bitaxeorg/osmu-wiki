@@ -7,28 +7,58 @@ githubRepo: https://github.com/skot/bitaxe/tree/axeTester
 
 The Bitaxe features the following endpoints:
 
-example api endpoint http://bitaxe-ip/api/system/info
+**GET**
 
-**GET:**
+* `/api/system/info` Get system information
+* `/api/system/asic` Get ASIC settings information
+* `/api/system/statistics` Get system statistics (data logging should be activated)
+* `/api/system/statistics/dashboard` Get system statistics for dashboard
+* `/api/system/wifi/scan` Scan for available WiFi networks
 
-`/api/system/info`
-`/api/swarm/info`
+**POST**
 
-**POST:**
+* `/api/system/restart` Restart the system
+* `/api/system/OTA` Update system firmware
+* `/api/system/OTAWWW` Update AxeOS
 
-`/api/system/restart`
+**PATCH**
 
-`/api/system/OTA`
-
-`/api/system/OTAWWW`
-
-**PATCH:**
-
-`/api/system/`
+* `/api/system/` Update system settings
 
 ---
 
-General Information about the Bitaxe can be gathered using the `/api/system/info` which will display you with some information as follows:
+### Examples
+
+**GET**
+
+Get system information: 
+
+`curl http://YOUR-BITAXE-IP/api/system/info`
+
+**POST**
+
+With POST command is it possible to restart the Bitaxe:
+
+`curl -X POST http://YOUR-BITAXE-IP/api/system/restart`
+
+**PATCH**
+
+The PATCH functionallity allows it to change settings on the Bitaxe.
+
+Some settings still require a restart but changing the fanspeed can be achieve live:
+
+```
+curl -X PATCH http://YOUR-BITAXE-IP/api/system \
+     -H "Content-Type: application/json" \
+     -d '{"fanspeed": "desired_speed_value"}'
+```
+
+---
+
+### Response
+
+The file [openapi.yaml](https://github.com/bitaxeorg/ESP-Miner/blob/master/main/http_server/openapi.yaml) contains response values for each API endpoint.
+For example, general information about the Bitaxe can be collected using the `/api/system/info`, which provides the following data:
 
 ```{
     "power": 58.35174560546875,
@@ -85,23 +115,4 @@ General Information about the Bitaxe can be gathered using the `/api/system/info
     "fanspeed": 35,
     "fanrpm": 5515
 }
-```
-
----
-
-With POST command is it possible to restart the Bitaxe:
-
-example:
-`curl -X POST http://bitaxeip/api/system/restart`
-
----
-
-The PATCH functionallity allows it to change settings on the Bitaxe.
-
-Some settings still require a restart but changing the fanspeed can be achieve live:
-
-```
-curl -X PATCH http://yourbitaxe/api/system \
-     -H "Content-Type: application/json" \
-     -d '{"fanspeed": "desired_speed_value"}'
 ```
