@@ -51,7 +51,7 @@ boardversion,data,string,0.11
 Save the file, we need it in the next step.
 
 ## 4. Flash
-Download the latest firmware from the [release page](https://github.com/skot/ESP-Miner/releases) or [compile it yourself](compile). It should look like `esp-miner-factory-vX.X.X.bin`. Now you can finally flash your BitAxe! To do so type into a system terminal:
+Download the latest firmware from the [release page](https://github.com/skot/ESP-Miner/releases) or [compile it yourself](/axeos/compile). It should look like `esp-miner-factory-vX.X.X.bin`. Now you can finally flash your BitAxe! To do so type into a system terminal:
 ```bash /{[^{}]*\}/
 bitaxetool --config {path-to-config} --firmware {path-to-firmware}
 ```

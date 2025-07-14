@@ -22,7 +22,7 @@ shops:
     link: https://www.thesolomining.co/bitaxe
     region: GB
   - name: Altair
-    link: https://altairtech.io/product-category/miners/bitaxe/
+    link: https://altairtech.io/product-category/miners/osm/
     region: US
   - name: Bitcoin Merch
     link: https://bitcoinmerch.com/de/pages/search-results-page?q=Bitaxe
