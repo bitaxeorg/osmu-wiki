@@ -26,7 +26,7 @@ The PiAxe's underlying hardware is the Raspberry Pi and it can be viewed as an e
 
 ## ⚙️ Guide
 
-Currently there only exists 1 Build of the PiAxe. If you wish to build your own take a look at the [Build Guide](building) and [Assembly Guide](assembly)
+Currently there only exists 1 Build of the PiAxe. If you wish to build your own take a look at the [Building Guide](/tips/building-pcbs) and [Assembly Guide](/tips/assembly)
 
 ### Software
 
