@@ -13,6 +13,6 @@ NerdQAxe+ is a combination of the Nerdminer-Display and the Bitaxe Ultra (BM1366
 
 This project uses specifically the Lilygo T-Display S3 and a modificated QAxe+ board. It uses the GPIO Pins in order to communicate with the ASIC chip and displays all stats and necessary information on the Screen.
 
-It comes with a modified version of AxeOs found [here](https://github.com/shufps/ESP-Miner-NerdQAxePlus).
+It comes with a modified version of AxeOS found [here](https://github.com/shufps/ESP-Miner-NerdQAxePlus).
 
 ![NerdQAxe+](./nerdqaxeplus.jpg)

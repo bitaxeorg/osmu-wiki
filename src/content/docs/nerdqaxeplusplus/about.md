@@ -13,12 +13,6 @@ NerdQAxe++ uses four BM1370 ASIC chips from the Antminer S21 series. It delivers
 
 The project specifically uses the Lilygo T-Display S3 and a modified QAxe++ board. It communicates with the ASIC chips via GPIO pins and displays all mining statistics and system information on the integrated screen.
 
-It comes with a modified version of AxeOs found [here](https://github.com/shufps/ESP-Miner-NerdQAxePlus).
+It comes with a modified version of AxeOS found [here](https://github.com/shufps/ESP-Miner-NerdQAxePlus).
 
 ![NerdQAxe++](./nerdqaxeplusplus.jpg)
-
-*Credit: https://plebbase.com*
-
-![NerdQAxe++ Board](./nerdqaxeplusplus-board.jpg)
-
-*Credit: https://plebbase.com*
