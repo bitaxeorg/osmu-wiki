@@ -24,7 +24,7 @@ example api endpoint http://bitaxe-ip/api/system/info
 
 **PATCH:**
 
-`/api/system/`
+`/api/system`
 
 ---
 
