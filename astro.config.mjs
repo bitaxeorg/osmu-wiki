@@ -97,6 +97,10 @@ export default defineConfig({
               label: "NerdQAxe+",
               link: "/nerdqaxeplus/about",
             },
+            {
+              label: "NerdQAxe++",
+              link: "/nerdqaxeplusplus/about",
+            },
           ],
         },
         {

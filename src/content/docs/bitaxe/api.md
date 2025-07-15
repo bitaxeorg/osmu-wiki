@@ -23,7 +23,7 @@ The Bitaxe features the following endpoints:
 
 **PATCH**
 
-* `/api/system/` Update system settings
+* `/api/system` Update system settings
 
 ---
 
