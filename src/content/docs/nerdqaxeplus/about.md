@@ -1,8 +1,7 @@
 ---
-title: About NerdQAxePlus
-logo: ./nerdqaxeplus.jpg
-githubRepo: hhttps://github.com/shufps/qaxe/tree/nerdqaxe%2B
-discordChannel: https://discord.com/channels/1274986130990829654
+title: About NerdQAxe+
+githubRepo: https://github.com/shufps/qaxe/tree/main/nerdqaxe%2B
+discordChannel: https://discord.com/channels/1091348375301013615/1274986130990829654
 ---
 
 This is a **free and open source project** that lets you try to reach a bitcoin block with a small piece of hardware.
@@ -14,6 +13,6 @@ NerdQAxe+ is a combination of the Nerdminer-Display and the Bitaxe Ultra (BM1366
 
 This project uses specifically the Lilygo T-Display S3 and a modificated QAxe+ board. It uses the GPIO Pins in order to communicate with the ASIC chip and displays all stats and necessary information on the Screen.
 
-It comes with a modified version of AxeOs found [here](https://github.com/shufps/ESP-Miner-NerdQAxePlus).
+It comes with a modified version of AxeOS found [here](https://github.com/shufps/ESP-Miner-NerdQAxePlus).
 
-![NerdQAxe](./nerdqaxeplus.jpg)
+![NerdQAxe+](./nerdqaxeplus.jpg)
