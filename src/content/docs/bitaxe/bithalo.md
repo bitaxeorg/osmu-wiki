@@ -9,7 +9,7 @@ githubRepo: https://github.com/IamGPIO
 
 # The first ever released Addon for Bitaxe!
 
-The BitHalo is a newly designed and manufactured product by [TheSoloMiningCo](https://www.thesolomining.co/product-page/bithalo-plug-and-play). It is a bespoke light board with side emitting LED's that react to processes during the mining operation.
+The BitHalo is a newly designed and manufactured product by [TheSoloMiningCo](https://github.com/IamGPIO/BitHalo-201-204-Bitaxe). It is a bespoke light board with side emitting LED's that react to processes during the mining operation.
 
 Upon loading, you are presented with a rotating purple lighting effect. Once all system are initalised, the orange pulse feature is loaded.
 
