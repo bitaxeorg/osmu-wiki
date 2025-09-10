@@ -35,8 +35,9 @@ TODO: `git` and `npm` lts
 
 ### Bitcoin Core/Knots
 
-MAYBE: have a community mining config?
-
+MAYBE: have a community mining config?  
+TODO: note about pruning, prefer 10-30gib of space for the chain  
+    not everyone casually has 1 tib of free space
 ### btcd
 
 
