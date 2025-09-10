@@ -2,36 +2,42 @@
 title: Self-Hosting Public Pool
 ---
 
-1. 💻 [Windows](#-windows) - TODO
-2. 🍏 [MacOS](#-macos) - TODO
-3. 🐧 [Linux](#-linux)
+## Installing Dependencies
 
-## 💻 Windows
+TODO: `git` and `npm` lts
 
-## 🍏 MacOS
+### 💻 Windows
 
-## 🐧 Linux
+### 🍏 MacOS
 
-### Installing Bitcoin Core
+- use homebrew to install the latest node lts  
+    the version needs to be specified
+
+### 🐧 Linux
+
+#### Debian, Ubuntu, and Derivatives
+- install git with `apt install git`
+- select the node.js runtime, your distro, and the latest lts version from https://nodesource.com/products/distributions
+
+#### Arch and Derivatives
+- install git with `pacman -S git`
+- use your favorite aur helper to install the latest node lts, or install nvm, then use nvm to install and activate the latest node lts
+
+## Installing Bitcoin Core
 
 - download latest release from https://bitcoin.org/en/download
   TODO: note about knots and btcd being usable as well
 - extract everything in `bitcoin-XX.X/bin` to `/usr/local/bin`, and everything in `bitcoin-XX.X/share` to `/usr/local/share`
 
-### Installing NodeJS
+## Configuring Bitcoin
 
-- ubuntu/debian: select the node.js runtime, your distro, and the latest lts version from https://nodesource.com/products/distributions
-- arch: use nvm to install the latest lts
-
-### Configuring Bitcoin
-
-#### Bitcoin Core/Knots
+### Bitcoin Core/Knots
 
 MAYBE: have a community mining config?
 
-#### btcd
+### btcd
 
-### Getting and Starting Public-Pool
+## Getting and Starting Public-Pool
 
 - `git clone https://github.com/benjamin-wilson/public-pool.git`
 - `cd ./public-pool`
