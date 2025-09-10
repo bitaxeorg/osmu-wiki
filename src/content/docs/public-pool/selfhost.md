@@ -2,6 +2,8 @@
 title: Self-Hosting Public Pool
 ---
 
+bla bla overview here, something about being able to do this on your home pc but dedicated hardware is nice too (and especially note old pcs are perfectly fine)
+
 ## Installing Dependencies
 
 TODO: `git` and `npm` lts
@@ -29,7 +31,7 @@ TODO: `git` and `npm` lts
   TODO: note about knots and btcd being usable as well
 - extract everything in `bitcoin-XX.X/bin` to `/usr/local/bin`, and everything in `bitcoin-XX.X/share` to `/usr/local/share`
 
-## Configuring Bitcoin
+## Setting up your Bitcoin node
 
 ### Bitcoin Core/Knots
 
@@ -37,7 +39,8 @@ MAYBE: have a community mining config?
 
 ### btcd
 
-## Getting and Starting Public-Pool
+
+## Setting up your private Public-Pool
 
 - `git clone https://github.com/benjamin-wilson/public-pool.git`
 - `cd ./public-pool`
