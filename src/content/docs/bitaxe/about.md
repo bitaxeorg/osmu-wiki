@@ -1,32 +1,9 @@
 ---
-title: About the BitAxe
+title: About the Bitaxe
 logo: ./bitaxe-logo.svg
-discordChannel: https://discord.gg/VxNqpPzCYW
-githubRepo: https://github.com/skot/bitaxe
-shops:
-  - name: Open Source Miner
-    link: https://opensourceminer.com/
-    official: true
-    region: US
-  - name: Jabitaxe
-    link: https://www.jabitaxe.com/
-    official: true
-    region: US
-  - name: D-Central
-    link: https://www.rgzen.com/index.php
-    region: CA
-  - name: RGZ electronics
-    link: https://www.rgzen.com/index.php
-    region: ES
-  - name: The Solo Mining Co'
-    link: https://www.thesolomining.co/bitaxe
-    region: GB
-  - name: Altair
-    link: https://altairtech.io/product-category/miners/osm/
-    region: US
-  - name: Bitcoin Merch
-    link: https://bitcoinmerch.com/de/pages/search-results-page?q=Bitaxe
-    region: US
+discordChannel: https://discord.gg/osmu
+githubRepo: https://github.com/bitaxeorg/
+
 ---
 
 The Bitaxe is a groundbreaking open-source Bitcoin standalone miner, representing a significant leap in mining technology. At its core, it employs an ASIC chip, a specialized application-specific integrated circuit designed for optimal Bitcoin mining performance. Adding to its innovative features, the Bitaxe is equipped with an ESP32-S3, serving as the brain of the miner and facilitating seamless connectivity to Wi-Fi networks.
