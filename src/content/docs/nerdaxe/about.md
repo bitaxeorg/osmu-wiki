@@ -8,7 +8,7 @@ discordChannel: https://discord.com/channels/1218901673448177674
 This is a **free and open source project** that lets you try to reach a bitcoin block with a small piece of hardware.
 The main goal of this project is to let you **learn more about minery** and to have a beautiful piece of hardware on your desktop.
 
-It originates from the [BitaxeUltra](https://github.com/skot/bitaxe).
+It originates from the [BitaxeUltra](https://github.com/bitaxeorg/bitaxeultra).
 
 Nerdaxe is a combination of the Nerdminer-Display and the Bitaxe Ultra (BM1366). It utilizes the BM1366 ASIC chip and combines the Bitaxe logic with the beautiful screen of a Nerdminer. Increasing the Hashrate up to 500GH/s.
 
