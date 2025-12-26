@@ -28,7 +28,7 @@ This guide shows you, how you can compile AxeOS yourself. It is split into three
 
 ### 2. Clone repository
 
-Clone the [ESP-Miner](https://github.com/skot/ESP-Miner) repository and open it in VSCode.
+Clone the [ESP-Miner](https://github.com/bitaxeorg/ESP-Miner) repository and open it in VSCode.
 
 ### 3. Configuration
 
@@ -133,7 +133,7 @@ Now you can run `get_idf` to set up or refresh the ESP-IDF environment in any te
 
 ### Clone repository
 
-Clone the [ESP-Miner](https://github.com/skot/ESP-Miner) repository and open it in VSCode.
+Clone the [ESP-Miner](https://github.com/bitaxeorg/ESP-Miner) repository and open it in VSCode.
 
 :::caution[The next steps are not written yet.]
 Help us to complete the wiki by using the "Edit page" button at the end of the page 👇

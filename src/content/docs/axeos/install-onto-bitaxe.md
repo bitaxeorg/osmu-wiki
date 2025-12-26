@@ -20,7 +20,7 @@ pip install --upgrade bitaxetool
 
 Starting with v2.0.0, the AxeOS firmware requires some basic manufacturing data to be flashed in the NVS partition.
 
-Create a file called `config.cvs` and copy the content of [this file](https://github.com/skot/ESP-Miner/blob/master/config.cvs.example) into it. You have to modify
+Create a file called `config.cvs` and copy the content of [this file](https://github.com/bitaxeorg/ESP-Miner/blob/master/config.cvs.example) into it. You have to modify
 - `asicfrequency`
 - `asicvoltage`
 - `asicmodel`
@@ -51,7 +51,7 @@ boardversion,data,string,0.11
 Save the file, we need it in the next step.
 
 ## 4. Flash
-Download the latest firmware from the [release page](https://github.com/skot/ESP-Miner/releases) or [compile it yourself](/axeos/compile). It should look like `esp-miner-factory-vX.X.X.bin`. Now you can finally flash your BitAxe! To do so type into a system terminal:
+Download the latest firmware from the [release page](https://github.com/bitaxeorg/ESP-Miner/releases) or [compile it yourself](/axeos/compile). It should look like `esp-miner-factory-vX.X.X.bin`. Now you can finally flash your BitAxe! To do so type into a system terminal:
 ```bash /{[^{}]*\}/
 bitaxetool --config {path-to-config} --firmware {path-to-firmware}
 ```

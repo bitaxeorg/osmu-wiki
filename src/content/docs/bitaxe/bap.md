@@ -2,7 +2,7 @@
 title: About Bitaxe Accessories Port
 logo: ./bitaxe-logo.svg
 discordChannel: https://discord.com/channels/1091348375301013615/1094385604982210633
-githubRepo: https://github.com/skot/bitaxe
+githubRepo: https://github.com/bitaxeorg/bitaxe
 ---
 
 The Bitaxe Accessories Port (BAP) is a serial port for multiple accessories to communicate with the ESP32 on the board.
@@ -23,4 +23,4 @@ We're excited to unveil the Bitaxe Accessories Port (BAP), a versatile addition 
 
 ## How to Get Started with the BAP
 
-Integrating the BAP into your Bitaxe setup is straightforward. Simply connect your accessories to the appropriate pins on the port. Ensure that your devices are compatible with the 5V power supply provided by the BAP. For detailed instructions and diagrams, refer to the Bitaxe documentation available on our [GitHub page](https://github.com/skot/bitaxe) and [official website](https://bitaxe.org/).
+Integrating the BAP into your Bitaxe setup is straightforward. Simply connect your accessories to the appropriate pins on the port. Ensure that your devices are compatible with the 5V power supply provided by the BAP. For detailed instructions and diagrams, refer to the Bitaxe documentation available on our [GitHub page](https://github.com/bitaxeorg/bitaxe) and [official website](https://bitaxe.org/).
