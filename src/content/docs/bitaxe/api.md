@@ -14,12 +14,15 @@ The Bitaxe features the following endpoints:
 * `/api/system/statistics` Get system statistics (data logging should be activated)
 * `/api/system/statistics/dashboard` Get system statistics for dashboard
 * `/api/system/wifi/scan` Scan for available WiFi networks
+* `/api/theme` Get current theme settings
 
 **POST**
 
 * `/api/system/restart` Restart the system
+* `/api/system/identify` Identify the device
 * `/api/system/OTA` Update system firmware
 * `/api/system/OTAWWW` Update AxeOS
+* `/api/theme` Update theme settings
 
 **PATCH**
 
