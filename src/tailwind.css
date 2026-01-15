@@ -1,6 +1,99 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer base, starlight, theme, components, utilities;
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@theme {
+  --color-accent-200: #c9c4e0;
+  --color-accent-600: #6e5da8;
+  --color-accent-900: #332c4d;
+  --color-accent-950: #242035;
+
+  --color-gray-100: #f6f6f9;
+  --color-gray-200: #eeecf4;
+  --color-gray-300: #c2c0ca;
+  --color-gray-400: #8d899a;
+  --color-gray-500: #595565;
+  --color-gray-700: #393644;
+  --color-gray-800: #282432;
+  --color-gray-900: #19171e;
+
+  --color-osmu-purple: #6A59A3;
+
+  --font-family-osmu: Montserrat;
+}
+
+/* Starlight theme customization */
+:root {
+  --sl-color-accent-low: #c9c4e0;
+  --sl-color-accent: #6e5da8;
+  --sl-color-accent-high: #332c4d;
+  --sl-color-white: #f6f6f9;
+  --sl-color-gray-1: #eeecf4;
+  --sl-color-gray-2: #c2c0ca;
+  --sl-color-gray-3: #8d899a;
+  --sl-color-gray-4: #595565;
+  --sl-color-gray-5: #393644;
+  --sl-color-gray-6: #282432;
+  --sl-color-black: #19171e;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #c9c4e0;
+  --sl-color-accent: #6e5da8;
+  --sl-color-accent-high: #332c4d;
+  --sl-color-white: #19171e;
+  --sl-color-gray-1: #282432;
+  --sl-color-gray-2: #393644;
+  --sl-color-gray-3: #595565;
+  --sl-color-gray-4: #8d899a;
+  --sl-color-gray-5: #c2c0ca;
+  --sl-color-gray-6: #eeecf4;
+  --sl-color-black: #f6f6f9;
+}
+
+/* Custom ToC active section styling */
+starlight-toc a[aria-current='true'],
+starlight-toc a[aria-current='true']:hover,
+starlight-toc a[aria-current='true']:focus {
+  color: var(--sl-color-black) !important;
+  background-color: var(--sl-color-white);
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  margin-inline: -0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* Style links in content to be more readable */
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--sl-color-white) !important;
+  text-decoration: underline !important;
+  text-decoration-color: var(--sl-color-accent) !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 3px !important;
+  font-weight: 500 !important;
+}
+
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  color: var(--sl-color-accent-high) !important;
+  text-decoration-color: var(--sl-color-accent-high) !important;
+}
+
+/* Style the site title "Wiki" */
+.site-title {
+  color: var(--sl-color-white) !important;
+  font-weight: 700 !important;
+}
+
+/* Style social icons (Discord) in navbar */
+.social-icons a {
+  color: var(--sl-color-white) !important;
+}
+
+.social-icons a:hover {
+  color: var(--sl-color-accent-high) !important;
+  opacity: 1 !important;
+}
 
 @font-face {
     font-family: Montserrat;

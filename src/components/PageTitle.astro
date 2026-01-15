@@ -1,14 +1,14 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
+const { entry } = Astro.locals.starlightRoute;
 import ChipLink from './ChipLink.astro';
 import ChipShops from './ChipShops.astro';
 import { Image } from 'astro:assets';
 
-const { discordChannel, githubRepo, shops, logo }  = Astro.props.entry.data
+const { discordChannel, githubRepo, shops, logo }  = entry.data;
 ---
 
 <div class="relative flex flex-col sm:flex-row gap-3">
-    <h1 id="_top">{Astro.props.entry.data.title}</h1>
+    <h1 id="_top">{entry.data.title}</h1>
     <div class="sm:ml-auto flex flex-wrap gap-2 sm:flex-col">
         {
             discordChannel !== undefined &&

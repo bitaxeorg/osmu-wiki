@@ -14,7 +14,7 @@ const { title, image, flip } = Astro.props as Props
 ---
 
 <article class="grid grid-cols-2 grid-rows-[1fr_auto] md:grid-rows-2 gap-5 text-lg items-center">
-    <h2 class="text-osmu-purple text-4xl row-start-1 mx-5 md:self-end md:m-0" class:list={{"col-start-2 justify-self-end": flip}}>{title}</h2>
+    <h2 class="text-osmu-purple text-4xl font-bold row-start-1 mx-5 md:self-end md:m-0" class:list={{"col-start-2 justify-self-end": flip}}>{title}</h2>
     <Image {...image} class="w-32 md:w-52 h-auto row-start-1 mx-5 md:mx-0 md:row-span-2" class:list={{"justify-self-end": !flip}}/>
     <span class="col-span-2 md:col-span-1 md:self-start" class:list={{"md:text-right": flip}}>
         <slot/>

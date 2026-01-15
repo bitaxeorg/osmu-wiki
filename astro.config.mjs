@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import tailwind from "@astrojs/tailwind";
+import tailwindv4 from "@tailwindcss/vite";
 import svelte from "@astrojs/svelte";
 import links from "./links";
 
@@ -12,9 +12,13 @@ export default defineConfig({
       logo: {
         src: "./src/assets/osmu-logo.svg",
       },
-      social: {
-        discord: links.discordInvite,
-      },
+      social: [
+        {
+          label: "Discord",
+          href: links.discordInvite,
+          icon: "discord",
+        },
+      ],
       editLink: {
         baseUrl: links.gitEditBase,
       },
@@ -237,10 +241,9 @@ export default defineConfig({
         PageTitle: "./src/components/PageTitle.astro",
       },
     }),
-    tailwind({
-      // Disable the default base styles:
-      applyBaseStyles: false,
-    }),
     svelte(),
   ],
+  vite: {
+    plugins: [tailwindv4()],
+  },
 });
