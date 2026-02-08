@@ -14,7 +14,6 @@ The Bitaxe features the following endpoints:
 * `/api/system/statistics` Get system statistics (data logging should be activated)
 * `/api/system/statistics/dashboard` Get system statistics for dashboard
 * `/api/system/wifi/scan` Scan for available WiFi networks
-* `/api/theme` Get current theme settings
 
 **POST**
 
@@ -22,7 +21,6 @@ The Bitaxe features the following endpoints:
 * `/api/system/identify` Identify the device
 * `/api/system/OTA` Update system firmware
 * `/api/system/OTAWWW` Update AxeOS
-* `/api/theme` Update theme settings
 
 **PATCH**
 
@@ -70,12 +68,6 @@ Get available WiFi networks:
 curl http://YOUR-BITAXE-IP/api/system/wifi/scan
 ```
 
-Get current theme settings:
-
-```bash
-curl http://YOUR-BITAXE-IP/api/theme
-```
-
 **POST**
 
 Restart the system:
@@ -108,19 +100,11 @@ curl -X POST \
      http://YOUR-BITAXE-IP/api/system/OTAWWW
 ```
 
-Update theme settings:
-
-```bash
-curl -X POST http://YOUR-BITAXE-IP/api/theme \
-     -H "Content-Type: application/json" \
-     -d '{"theme": "dark", "colors": {...}}'
-```
-
 **PATCH**
 
-The PATCH functionality allows you to change settings on the Bitaxe.
+The PATCH functionality allows you to change settings on the Bitaxe. Some settings may require a restart, but many can be changed on-the-fly.
 
-Some settings still require a restart but changing the fanspeed can be achieved live:
+Change fan speed (when autofanspeed is disabled):
 
 ```bash
 curl -X PATCH http://YOUR-BITAXE-IP/api/system \
@@ -128,12 +112,126 @@ curl -X PATCH http://YOUR-BITAXE-IP/api/system \
      -d '{"fanspeed": 50}'
 ```
 
+Enable automatic fan speed control:
+
+```bash
+curl -X PATCH http://YOUR-BITAXE-IP/api/system \
+     -H "Content-Type: application/json" \
+     -d '{"autofanspeed": 1}'
+```
+
+Set target temperature for automatic fan control:
+
+```bash
+curl -X PATCH http://YOUR-BITAXE-IP/api/system \
+     -H "Content-Type: application/json" \
+     -d '{"temptarget": 65}'
+```
+
+Update ASIC frequency (requires overclock enabled):
+
+```bash
+curl -X PATCH http://YOUR-BITAXE-IP/api/system \
+     -H "Content-Type: application/json" \
+     -d '{"frequency": 500}'
+```
+
+Update ASIC core voltage (requires overclock enabled):
+
+```bash
+curl -X PATCH http://YOUR-BITAXE-IP/api/system \
+     -H "Content-Type: application/json" \
+     -d '{"coreVoltage": 1200}'
+```
+
+Update stratum pool settings:
+
+```bash
+curl -X PATCH http://YOUR-BITAXE-IP/api/system \
+     -H "Content-Type: application/json" \
+     -d '{
+       "stratumURL": "stratum+tcp://pool.example.com",
+       "stratumPort": 3333,
+       "stratumUser": "your_wallet.worker_name",
+       "stratumPassword": "x"
+     }'
+```
+
+Update WiFi settings:
+
+```bash
+curl -X PATCH http://YOUR-BITAXE-IP/api/system \
+     -H "Content-Type: application/json" \
+     -d '{
+       "ssid": "YourWiFiNetwork",
+       "wifiPass": "YourPassword",
+       "hostname": "bitaxe"
+     }'
+```
+
+Multiple settings can be updated in a single request:
+
+```bash
+curl -X PATCH http://YOUR-BITAXE-IP/api/system \
+     -H "Content-Type: application/json" \
+     -d '{
+       "autofanspeed": 1,
+       "temptarget": 60,
+       "displayTimeout": 10,
+       "statsFrequency": 120
+     }'
+```
+
 ---
 
-### Response
+### Available Settings
 
-The file [openapi.yaml](https://github.com/bitaxeorg/ESP-Miner/blob/master/main/http_server/openapi.yaml) contains response values for each API endpoint.
-For example, general information about the Bitaxe can be collected using the `/api/system/info`, which provides the following data:
+The following settings can be updated via PATCH requests to `/api/system`:
+
+**Pool Configuration:**
+- `stratumURL` - Primary stratum server URL (e.g., "stratum+tcp://pool.example.com")
+- `stratumPort` - Primary stratum server port (1-65535)
+- `stratumUser` - Username for primary stratum server
+- `stratumPassword` - Password for primary stratum server
+- `fallbackStratumURL` - Fallback stratum server URL
+- `fallbackStratumPort` - Fallback stratum server port (1-65535)
+- `fallbackStratumUser` - Username for fallback stratum server
+- `fallbackStratumPassword` - Password for fallback stratum server
+- `useFallbackStratum` - Force use of fallback stratum pool
+
+**WiFi Configuration:**
+- `ssid` - WiFi network SSID (1-32 characters)
+- `wifiPass` - WiFi network password (8-63 characters)
+- `hostname` - Device hostname (alphanumeric and hyphens only)
+
+**ASIC Configuration:**
+- `coreVoltage` - ASIC core voltage in millivolts (requires `overclockEnabled: 1`)
+- `frequency` - ASIC frequency in MHz (requires `overclockEnabled: 1`)
+- `overclockEnabled` - Enable custom voltage/frequency (0=disabled, 1=enabled)
+
+**Fan Control:**
+- `autofanspeed` - Automatic fan speed control (0=manual, 1=auto)
+- `fanspeed` - Manual fan speed percentage when autofanspeed is disabled (0-100)
+- `temptarget` - Target temperature in °C for automatic fan control (0-100)
+
+**Display Settings:**
+- `rotation` - Screen rotation (0, 90, 180, 270 degrees)
+- `invertscreen` - Invert screen colors (0=normal, 1=inverted)
+- `displayTimeout` - Display timeout in minutes (-1=always on, 0=always off, >0=timeout)
+
+**Advanced Settings:**
+- `overheat_mode` - Overheat protection mode (0=disabled)
+- `statsFrequency` - Statistics logging frequency in seconds (0=disabled)
+
+---
+
+### Response Formats
+
+The complete API specification with all response schemas is available in [openapi.yaml](https://github.com/bitaxeorg/ESP-Miner/blob/master/main/http_server/openapi.yaml).
+
+#### `/api/system/info` Response
+
+General information about the Bitaxe can be collected using `/api/system/info`, which provides the following data:
 
 ```
 {
@@ -224,3 +322,120 @@ For example, general information about the Bitaxe can be collected using the `/a
 	}
 }
 ```
+
+#### `/api/system/asic` Response
+
+ASIC settings information can be retrieved using `/api/system/asic`, which returns:
+
+```json
+{
+	"ASICModel": "BM1370",
+	"deviceModel": "Gamma",
+	"swarmColor": "purple",
+	"asicCount": 1,
+	"defaultFrequency": 490,
+	"frequencyOptions": [400, 425, 450, 475, 485, 490, 500, 525, 550, 575],
+	"defaultVoltage": 1200,
+	"voltageOptions": [1100, 1150, 1200, 1250, 1300]
+}
+```
+
+**ASIC Models:**
+- `BM1366` - Used in Bitaxe Ultra
+- `BM1368` - Used in Bitaxe Supra
+- `BM1370` - Used in Bitaxe Gamma
+- `BM1397` - Used in Bitaxe (original)
+
+#### `/api/system/wifi/scan` Response
+
+WiFi network scan results can be retrieved using `/api/system/wifi/scan`:
+
+```json
+{
+	"networks": [
+		{
+			"ssid": "MyWiFiNetwork",
+			"rssi": -65,
+			"authmode": 3
+		},
+		{
+			"ssid": "AnotherNetwork",
+			"rssi": -72,
+			"authmode": 4
+		}
+	]
+}
+```
+
+**Authentication Modes:**
+- `0` - OPEN (no security)
+- `1` - WEP
+- `2` - WPA_PSK
+- `3` - WPA2_PSK
+- `4` - WPA_WPA2_PSK
+- `5` - WPA2_ENTERPRISE
+- `6` - WPA3_PSK
+- `7` - WPA2_WPA3_PSK
+- `8` - WAPI_PSK
+- `9` - OWE (Opportunistic Wireless Encryption)
+- `10` - WPA3_ENT_192 (Enterprise Suite-B)
+
+**RSSI Values:**
+- `-30 dBm` - Excellent signal
+- `-50 dBm` - Very good signal
+- `-60 dBm` - Good signal
+- `-67 dBm` - Fair signal
+- `-70 dBm` - Weak signal
+- `-80 dBm` - Very weak signal
+- `-90 dBm` - Unusable signal
+
+#### `/api/system/statistics` Response
+
+System statistics can be retrieved using `/api/system/statistics`. This endpoint supports filtering by specific columns using the `columns` query parameter.
+
+Available columns include:
+- `hashrate`, `hashrate_1m`, `hashrate_10m`, `hashrate_1h` - Hashrate measurements
+- `asicTemp`, `vrTemp` - Temperature readings
+- `asicVoltage`, `voltage` - Voltage measurements
+- `power`, `current` - Power consumption metrics
+- `fanSpeed`, `fanRpm`, `fan2Rpm` - Fan speed information
+- `wifiRssi` - WiFi signal strength
+- `freeHeap` - Available memory
+- `responseTime` - Pool response time
+
+Response format:
+
+```json
+{
+	"currentTimestamp": 1234567890,
+	"labels": ["hashrate", "asicTemp", "power"],
+	"statistics": [
+		[1072.24, 60.5, 18.75],
+		[1068.12, 61.0, 18.80]
+	]
+}
+```
+
+---
+
+### HTTP Status Codes
+
+The API returns standard HTTP status codes:
+
+- `200 OK` - Request successful
+- `400 Bad Request` - Invalid request parameters or settings
+- `401 Unauthorized` - Client not in allowed network range
+- `500 Internal Server Error` - Server error occurred
+
+---
+
+### Notes
+
+- All API endpoints return JSON responses except for OTA update endpoints
+- The `/api/system/statistics` endpoint requires data logging to be enabled (`statsFrequency` > 0)
+- Some settings changes via PATCH may require a system restart to take effect
+- WiFi and stratum password fields are write-only and will not be returned in GET responses
+- Temperature values are returned in Celsius
+- Voltage values are typically in millivolts for ASIC settings
+- Power values are in watts
+- Hashrate values are in GH/s (Gigahashes per second)
