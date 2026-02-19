@@ -122,6 +122,10 @@ export default defineConfig({
               label: "Overview",
               link: "/public-pool/about",
             },
+            {
+              label: "Self-Hosting",
+              link: "/public-pool/selfhost",
+            },
           ],
         },
         {
