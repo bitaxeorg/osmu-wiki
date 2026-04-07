@@ -60,6 +60,10 @@ export default defineConfig({
               link: "/bitaxe/600",
             },
             {
+              label: "650 / Gamma Duo",
+              link: "/bitaxe/650",
+            },
+            {
               label: "801 / Gamma Turbo",
               link: "/bitaxe/800",
             },
