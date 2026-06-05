@@ -7,7 +7,7 @@ import { Image } from 'astro:assets';
 const { discordChannel, githubRepo, shops, logo }  = entry.data;
 ---
 
-<div class="relative flex flex-col sm:flex-row gap-3">
+<div class="relative isolate flex flex-col sm:flex-row gap-3">
     <h1 id="_top">{entry.data.title}</h1>
     <div class="sm:ml-auto flex flex-wrap gap-2 sm:flex-col">
         {
@@ -24,7 +24,7 @@ const { discordChannel, githubRepo, shops, logo }  = entry.data;
         }
     </div>
     { logo && 
-        <Image src={logo} alt="The Logo of the project." class="invert opacity-5 absolute top-10 right-2 w-80 h-auto rotate-[20deg] dark:invert-0 -z-10 pointer-events-none"/>
+        <Image src={logo} alt="The Logo of the project." class="invert opacity-10 absolute top-10 right-2 w-80 h-auto rotate-[20deg] dark:invert-0 -z-10 pointer-events-none"/>
     }
 </div>
 

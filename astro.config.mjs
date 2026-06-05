@@ -78,6 +78,15 @@ export default defineConfig({
           ],
         },
         {
+          label: "BitForge",
+          items: [
+            {
+              label: "BitForge",
+              link: "/bitforge/bitforge",
+            },
+          ],
+        },
+        {
           label: "Bitaxe Accessories",
           items: [
             {
