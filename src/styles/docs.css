@@ -1,0 +1,325 @@
+/*
+ * Docs chrome
+ * -----------
+ * Presentation for the Starlight-rendered wiki. Content is untouched; this only restyles
+ * the shell around it — header, sidebar, table of contents, typography, code, cards.
+ */
+
+/* ─── Shell ────────────────────────────────────────────────────────────────── */
+body {
+  font-family: var(--osmu-font-body);
+  background: var(--osmu-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* A faint grid behind the page, so large empty areas are not dead flat. */
+.page {
+  position: relative;
+  background-image:
+    linear-gradient(var(--osmu-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--osmu-grid-line) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  background-position: center top;
+}
+
+/* ─── Header ───────────────────────────────────────────────────────────────── */
+.header {
+  background: var(--sl-color-bg-nav);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--osmu-border);
+  box-shadow: var(--osmu-shadow-sm);
+}
+
+.site-title {
+  font-family: var(--osmu-font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--osmu-text);
+  gap: 0.6rem;
+}
+
+.site-title img {
+  height: 2rem;
+  width: auto;
+}
+
+/* Search box */
+site-search button[data-open-modal] {
+  border: 1px solid var(--osmu-border);
+  background: var(--osmu-surface);
+  border-radius: var(--osmu-radius-full);
+  transition: border-color 0.2s var(--osmu-ease), background-color 0.2s var(--osmu-ease);
+}
+
+site-search button[data-open-modal]:hover {
+  border-color: var(--osmu-accent-muted);
+  background: var(--osmu-surface-hover);
+}
+
+/* Social + theme controls */
+.social-icons a {
+  color: var(--osmu-text-secondary);
+  transition: color 0.2s var(--osmu-ease), transform 0.2s var(--osmu-ease);
+}
+
+.social-icons a:hover {
+  color: var(--osmu-accent);
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+starlight-theme-select select,
+site-search + * select {
+  border-radius: var(--osmu-radius-full);
+}
+
+/* ─── Sidebar ──────────────────────────────────────────────────────────────── */
+.sidebar-pane {
+  border-inline-end: 1px solid var(--osmu-border);
+  background: var(--sl-color-bg-sidebar);
+}
+
+.sidebar-content {
+  padding-top: 1.25rem;
+}
+
+/* Group headings */
+.sidebar-content summary,
+.sidebar-content > ul > li > details > summary > .group-label > span,
+.sidebar-content .large {
+  font-family: var(--osmu-font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--osmu-text-muted);
+}
+
+.sidebar-content a {
+  border-radius: var(--osmu-radius-sm);
+  padding-block: 0.35rem;
+  padding-inline: 0.6rem;
+  margin-inline: -0.15rem;
+  color: var(--osmu-text-secondary);
+  font-size: 0.9rem;
+  transition: background-color 0.15s var(--osmu-ease), color 0.15s var(--osmu-ease);
+}
+
+.sidebar-content a:hover {
+  background: var(--osmu-surface-hover);
+  color: var(--osmu-text);
+}
+
+/* Current page: a soft tinted pill with an accent marker */
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover {
+  position: relative;
+  background: var(--osmu-accent-surface);
+  color: var(--osmu-accent);
+  font-weight: 600;
+}
+
+.sidebar-content a[aria-current='page']::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: -0.35rem;
+  top: 50%;
+  translate: 0 -50%;
+  width: 3px;
+  height: 1.05rem;
+  border-radius: var(--osmu-radius-full);
+  background: var(--osmu-accent);
+}
+
+/* ─── Table of contents ────────────────────────────────────────────────────── */
+starlight-toc nav > h2 {
+  font-family: var(--osmu-font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--osmu-text-muted);
+}
+
+starlight-toc a {
+  border-radius: var(--osmu-radius-sm);
+  padding: 0.3rem 0.6rem;
+  margin-inline: -0.6rem;
+  color: var(--osmu-text-muted);
+  transition: color 0.15s var(--osmu-ease), background-color 0.15s var(--osmu-ease);
+}
+
+starlight-toc a:hover {
+  color: var(--osmu-text);
+  background: var(--osmu-surface-hover);
+}
+
+/* Replaces the previous solid white block, which read as a bug in dark mode. */
+starlight-toc a[aria-current='true'],
+starlight-toc a[aria-current='true']:hover,
+starlight-toc a[aria-current='true']:focus {
+  color: var(--osmu-accent);
+  background: var(--osmu-accent-surface);
+  font-weight: 600;
+}
+
+/* ─── Content typography ───────────────────────────────────────────────────── */
+.sl-markdown-content {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--osmu-text-secondary);
+}
+
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--osmu-font-display);
+  color: var(--osmu-text);
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+.sl-markdown-content h2 {
+  margin-top: 2.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--osmu-border);
+}
+
+.sl-markdown-content strong {
+  color: var(--osmu-text);
+  font-weight: 650;
+}
+
+/* Links: accent coloured with a soft underline that fills in on hover. */
+.sl-markdown-content a:not(:where(.not-content *)) {
+  color: var(--osmu-accent);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid var(--osmu-accent-ring);
+  transition: border-color 0.2s var(--osmu-ease), color 0.2s var(--osmu-ease);
+}
+
+.sl-markdown-content a:hover:not(:where(.not-content *)) {
+  color: var(--osmu-accent-strong);
+  border-bottom-color: var(--osmu-accent-strong);
+}
+
+/* Images sit on a surface so transparent PNGs stay legible in both themes. */
+.sl-markdown-content img {
+  border-radius: var(--osmu-radius);
+  border: 1px solid var(--osmu-border);
+  background: var(--osmu-surface);
+  box-shadow: var(--osmu-shadow-sm);
+}
+
+.sl-markdown-content blockquote {
+  border-inline-start: 3px solid var(--osmu-accent);
+  background: var(--osmu-accent-surface);
+  border-radius: 0 var(--osmu-radius-sm) var(--osmu-radius-sm) 0;
+  padding: 0.85rem 1.15rem;
+  color: var(--osmu-text-secondary);
+}
+
+.sl-markdown-content :not(pre) > code {
+  background: var(--sl-color-bg-inline-code);
+  border: 1px solid var(--osmu-border);
+  border-radius: 0.4rem;
+  padding: 0.12em 0.4em;
+  font-family: var(--osmu-font-mono);
+  font-size: 0.875em;
+  color: var(--osmu-text);
+}
+
+.sl-markdown-content .expressive-code,
+.sl-markdown-content pre {
+  border-radius: var(--osmu-radius);
+  box-shadow: var(--osmu-shadow-sm);
+}
+
+.sl-markdown-content table {
+  border-radius: var(--osmu-radius);
+  overflow: hidden;
+  border: 1px solid var(--osmu-border);
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+
+.sl-markdown-content :is(th, td) {
+  border-bottom: 1px solid var(--osmu-border);
+  padding: 0.7rem 0.9rem;
+}
+
+.sl-markdown-content th {
+  background: var(--osmu-surface);
+  color: var(--osmu-text);
+  font-family: var(--osmu-font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.sl-markdown-content tr:last-child :is(th, td) {
+  border-bottom: none;
+}
+
+.sl-markdown-content hr {
+  border-color: var(--osmu-border);
+}
+
+/* ─── Page title block ─────────────────────────────────────────────────────── */
+.content-panel + .content-panel {
+  border-top: 1px solid var(--osmu-border);
+}
+
+/* ─── Prev / next pagination ───────────────────────────────────────────────── */
+.pagination-links a {
+  border: 1px solid var(--osmu-border);
+  background: var(--osmu-surface);
+  border-radius: var(--osmu-radius);
+  box-shadow: var(--osmu-shadow-sm);
+  transition: border-color 0.2s var(--osmu-ease), transform 0.2s var(--osmu-ease),
+    box-shadow 0.2s var(--osmu-ease);
+}
+
+.pagination-links a:hover {
+  border-color: var(--osmu-accent-muted);
+  transform: translateY(-2px);
+  box-shadow: var(--osmu-shadow);
+}
+
+.pagination-links a span {
+  color: var(--osmu-text);
+}
+
+/* ─── Cards / asides ───────────────────────────────────────────────────────── */
+.card {
+  border: 1px solid var(--osmu-border);
+  background: var(--osmu-surface);
+  border-radius: var(--osmu-radius);
+  box-shadow: var(--osmu-shadow-sm);
+}
+
+.starlight-aside {
+  border-radius: var(--osmu-radius);
+  border-inline-start-width: 3px;
+}
+
+/* ─── Focus visibility ─────────────────────────────────────────────────────── */
+:where(a, button, summary, input, select):focus-visible {
+  outline: 2px solid var(--osmu-accent);
+  outline-offset: 2px;
+  border-radius: var(--osmu-radius-sm);
+}
+
+/* ─── Motion preference ────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

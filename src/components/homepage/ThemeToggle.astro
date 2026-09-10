@@ -1,0 +1,81 @@
+---
+/**
+ * Theme toggle for the standalone pages (the homepage is not rendered by Starlight, so it
+ * does not inherit Starlight's own control).
+ *
+ * Deliberately reads and writes the same `starlight-theme` localStorage key and the same
+ * `data-theme` attribute Starlight uses, so a choice made here carries into the wiki and
+ * back again.
+ */
+---
+
+<button
+  id="osmu-theme-toggle"
+  type="button"
+  class="osmu-theme-toggle"
+  aria-label="Toggle colour theme"
+  title="Toggle colour theme"
+>
+  <svg class="osmu-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+  </svg>
+  <svg class="osmu-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<style>
+  .osmu-theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--osmu-radius-full);
+    border: 1px solid var(--osmu-border);
+    background: var(--osmu-surface);
+    color: var(--osmu-text-secondary);
+    cursor: pointer;
+    transition: color 0.2s var(--osmu-ease), border-color 0.2s var(--osmu-ease),
+      background-color 0.2s var(--osmu-ease);
+  }
+
+  .osmu-theme-toggle:hover {
+    color: var(--osmu-accent);
+    border-color: var(--osmu-accent-muted);
+    background: var(--osmu-surface-hover);
+  }
+
+  .osmu-theme-toggle svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  /* Show the icon for the theme you would switch *to*. */
+  .osmu-icon-sun { display: none; }
+  .osmu-icon-moon { display: block; }
+  :root[data-theme='dark'] .osmu-icon-sun { display: block; }
+  :root[data-theme='dark'] .osmu-icon-moon { display: none; }
+</style>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('osmu-theme-toggle');
+    if (!btn) return;
+
+    function apply(theme) {
+      document.documentElement.dataset.theme = theme;
+      try {
+        localStorage.setItem('starlight-theme', theme);
+      } catch (e) {
+        /* storage can be unavailable in private mode; the toggle still works for this page */
+      }
+    }
+
+    btn.addEventListener('click', function () {
+      var current = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+      apply(current === 'light' ? 'dark' : 'light');
+    });
+  })();
+</script>
