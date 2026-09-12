@@ -1,0 +1,23 @@
+---
+/**
+ * Applies the stored theme before first paint so standalone pages don't flash the wrong
+ * colours. Mirrors Starlight's own logic and storage key so the two stay in sync.
+ */
+---
+
+<script is:inline>
+  (function () {
+    var theme;
+    try {
+      theme = localStorage.getItem('starlight-theme');
+    } catch (e) {
+      theme = null;
+    }
+
+    if (theme !== 'light' && theme !== 'dark') {
+      theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    }
+
+    document.documentElement.dataset.theme = theme;
+  })();
+</script>

@@ -22,9 +22,9 @@ const getFlagEmoji = (countryCode?: string) => {
 }
 
 const shops = Astro.props.shops.map(shop => ({
-    ...shop, 
+    ...shop,
     flagEmoji: getFlagEmoji(shop.region),
-    ariaLabel: 
+    ariaLabel:
         [shop.name, shop.official ? "official OSMU vendor" : undefined, "Region: " + shop.region]
         .filter(l => l !== undefined)
         .join(" | ")
@@ -36,35 +36,121 @@ const shops = Astro.props.shops.map(shop => ({
     polyfillCountryFlagEmojis();
 </script>
 
-<style>
-    label {
-        font-family: "Twemoji Country Flags", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
-    }
-</style>
-
-<label
-    for="show-shops" aria-label="Shops"
-    class="grid grid-cols-[auto_auto_1fr_auto] items-center border border-gray-500 rounded-2xl py-1 pl-2 pr-3 text-gray-500 dark:text-gray-300 hover:text-black hover:dark:text-white no-underline text-sm cursor-pointer transition-colors"
->
-    <input type="checkbox" id="show-shops" class="peer hidden" aria-hidden="true">
-    <Iconify name="fluent:cart-16-filled" class="w-[1em]"/>
-    <div class="self-stretch w-px bg-gray-500 my-0.5 mx-1.5"></div>
-    <span class="font-bold">Shops</span>
-    <Icon name='down-caret' class='ml-1.5 peer-checked:rotate-180 transition-transform'/>
-    <ul class="col-start-3 grid max-w-0 max-h-0 peer-checked:max-w-[100vw] peer-checked:max-h-screen transition-all overflow-hidden list-none p-0">
+<label for="show-shops" aria-label="Shops" class="chip-shops">
+    <input type="checkbox" id="show-shops" class="peer" aria-hidden="true">
+    <Iconify name="fluent:cart-16-filled" class="cart-icon"/>
+    <span class="divider" aria-hidden="true"></span>
+    <span class="chip-label">Shops</span>
+    <Icon name='down-caret' class='caret'/>
+    <ul class="shop-list">
         {shops.map(shop => (
-            <li class=" hover:font-bold" aria-label={shop.ariaLabel}>
-                <a href={shop.link} target="_blank" class="text-black dark:text-white no-underline flex gap-1 items-center ">
+            <li aria-label={shop.ariaLabel}>
+                <a href={shop.link} target="_blank" rel="noopener">
                     { shop.flagEmoji }
                     { shop.name }
                     {
                         shop.official &&
-                        <div class="text-xs bg-blue-400 dark:text-black text-white rounded-full px-2 font-bold">
-                            official
-                        </div>
+                        <span class="official">official</span>
                     }
                 </a>
             </li>
         ))}
     </ul>
 </label>
+
+<style>
+    .chip-shops {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto;
+        align-items: center;
+        padding: 0.25rem 0.75rem 0.25rem 0.5rem;
+        border: 1px solid var(--osmu-border-strong);
+        border-radius: var(--osmu-radius);
+        background: var(--osmu-surface);
+        color: var(--osmu-text-secondary);
+        font-size: 0.8125rem;
+        cursor: pointer;
+        transition: color 0.2s var(--osmu-ease), border-color 0.2s var(--osmu-ease),
+            background-color 0.2s var(--osmu-ease);
+        /* The country-flag polyfill needs its font ahead of the stack. */
+        font-family: "Twemoji Country Flags", var(--osmu-font-body);
+    }
+
+    .chip-shops:hover {
+        color: var(--osmu-accent);
+        border-color: var(--osmu-accent-muted);
+        background: var(--osmu-surface-hover);
+    }
+
+    .peer {
+        display: none;
+    }
+
+    .cart-icon {
+        width: 1em;
+    }
+
+    .divider {
+        align-self: stretch;
+        width: 1px;
+        margin: 0.125rem 0.375rem;
+        background: var(--osmu-border-strong);
+    }
+
+    .chip-label {
+        font-weight: 700;
+    }
+
+    .caret {
+        margin-inline-start: 0.375rem;
+        transition: transform 0.2s var(--osmu-ease);
+    }
+
+    .peer:checked ~ .caret {
+        transform: rotate(180deg);
+    }
+
+    .shop-list {
+        grid-column-start: 3;
+        display: grid;
+        max-width: 0;
+        max-height: 0;
+        overflow: hidden;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        transition: max-width 0.25s var(--osmu-ease), max-height 0.25s var(--osmu-ease);
+    }
+
+    .peer:checked ~ .shop-list {
+        max-width: 100vw;
+        max-height: 100vh;
+        padding-top: 0.25rem;
+    }
+
+    .shop-list a {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding-block: 0.125rem;
+        color: var(--osmu-text);
+        text-decoration: none;
+    }
+
+    .shop-list a:hover {
+        color: var(--osmu-accent);
+    }
+
+    .official {
+        border-radius: var(--osmu-radius-full);
+        background: var(--osmu-accent);
+        color: var(--osmu-accent-contrast);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        padding-inline: 0.5rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .chip-shops, .caret, .shop-list { transition: none; }
+    }
+</style>

@@ -2,79 +2,867 @@
 import links from "../../links"
 import { Image } from 'astro:assets';
 import osmuLogo from "../assets/osmu-logo.svg"
+import osmuLogoDark from "../assets/osmu-logo-dark.svg"
 import heroImage from "../assets/bitaxe-render-and-schematic.png"
 import padlock from "../assets/padlock.svg"
 import bitcoinHead from "../assets/bitcoin-head.svg"
 import communityBubbles from "../assets/community-bubbles.png"
 import "../tailwind.css"
-import { Icon } from '@astrojs/starlight/components';
 import ArgumentSection from "../components/homepage/ArgumentSection.astro"
+import ThemeInit from "../components/homepage/ThemeInit.astro"
+import ThemeToggle from "../components/homepage/ThemeToggle.astro"
+
+/**
+ * The wiki's sidebar groups, surfaced on the homepage so the front page is a way in
+ * rather than a dead end. Page counts mirror the sidebar in astro.config.mjs.
+ */
+const sections = [
+    {
+        name: "Bitaxe",
+        blurb: "The open-source standalone Bitcoin miner — 100 / Max through to the 801 / Gamma Turbo, plus its API and BAP.",
+        href: "/bitaxe/about",
+        pages: 10,
+        featured: true,
+    },
+    {
+        name: "Nerdminer",
+        blurb: "Nerdminer, NerdNOS, NerdAxe, NerdQAxe+ and NerdQAxe++ — solo mining on an ESP32.",
+        href: "/nerdminer/about",
+        pages: 5,
+    },
+    {
+        name: "OSMU Lab",
+        blurb: "Reverse-engineering notes and published papers on the mining ASICs: BM1397, BM1366, BM1368 and BM1370.",
+        href: "/osmu-lab/about",
+        pages: 5,
+    },
+    {
+        name: "AxeOS",
+        blurb: "The ESP-Miner firmware behind every Bitaxe. Install it onto your board, or build it from source.",
+        href: "/axeos/about",
+        pages: 3,
+    },
+    {
+        name: "Piaxe",
+        blurb: "A Raspberry Pi mining HAT running a BM1366 — overview, assembly and build notes.",
+        href: "/piaxe/about",
+        pages: 3,
+    },
+    {
+        name: "Qaxe",
+        blurb: "A quad-BM1366 miner derived from the PiAxe and Bitaxe designs, with assembly and installation guides.",
+        href: "/qaxe/about",
+        pages: 3,
+    },
+    {
+        name: "Tips & Tricks",
+        blurb: "Building PCBs, assembly technique, and the questions everyone asks first.",
+        href: "/tips/faq",
+        pages: 3,
+    },
+    {
+        name: "Public Pool",
+        blurb: "A fully open-source solo Bitcoin mining pool you can point your hardware at — or host yourself.",
+        href: "/public-pool/about",
+        pages: 1,
+    },
+    {
+        name: "BitForge",
+        blurb: "The BitForge Nano: an open-source dual-BM1370 miner for solo and home mining.",
+        href: "/bitforge/bitforge",
+        pages: 1,
+    },
+    {
+        name: "Bitcrane",
+        blurb: "A tool for talking to an Antminer hashboard over USB, for developing alternative firmware.",
+        href: "/bitcrane/about",
+        pages: 1,
+    },
+    {
+        name: "Antsniffer",
+        blurb: "Tap the signals on an Antminer data cable for logic analyzers and development work.",
+        href: "/antsniffer/about",
+        pages: 1,
+    },
+    {
+        name: "Bitaxe Accessories",
+        blurb: "The BitHalo — a side-emitting LED board that reacts to your Bitaxe's mining operation.",
+        href: "/bitaxe/bithalo",
+        pages: 1,
+    },
+]
 ---
 
-<style>
-    body{
-        margin: 0;
-    }
-
-    a{
-        color: currentColor;
-    }
-</style>
-
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Source Miners United</title>
-    <link rel="icon" href="favicon.svg" type="image/svg">
+    <meta
+        name="description"
+        content="The origin of every big open source mining project. Documentation, build guides and community for Bitaxe, Nerdminer, AxeOS, Public Pool and more."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <ThemeInit />
 </head>
 
-<main class="font-osmu flex flex-col text-base">
-    <section class="grid grid-cols-[1fr_auto] grid-rows-[auto_auto_auto_auto_auto] justify-items-center content-center text-center md:grid-cols-[auto_1fr_1fr] md:grid-rows-[1fr_auto_auto_auto_1fr_auto]">
-        <Image src={osmuLogo} alt="OSMU Logo" class="w-44 h-auto m-5 justify-self-start self-center md:col-start-2 md:col-span-2 md:row-start-2 md:w-3/4 md:mx-auto"/>
-        <a
-            href={links.donation} target="_blank"
-            class="text-base py-1 px-5 bg-white font-osmu font-bold flex items-center text-osmu-purple border-2 border-osmu-purple rounded-lg no-underline m-5 justify-self-end md:col-start-2 md:row-start-4 md:mr-2 md:text-lg md:m-0"
-        >
-            Support Us
-        </a>
-        <Image
-            src={heroImage} alt="A render of the Bitaxe and its schematic behind it."
-            class="w-full h-auto object-contain object-bottom col-span-2 md:col-start-1 md:row-start-1 md:col-span-1 md:row-span-5 md:h-full md:w-[40vw] md:min-h-[30rem]"
-        />
-        <h1 class="m-0 text-4xl col-span-2 bg-osmu-purple p-10 text-white md:col-start-2 md:row-start-3 md:col-span2 md:bg-transparent md:text-osmu-purple">The origin of every big open source mining project.</h1>
-        <div class="bg-osmu-purple flex justify-center col-span-2 w-full md:w-auto md:col-start-3 md:row-start-4 md:bg-transparent md:justify-self-start md:self-center">
-            <a
-                href="/osmu/about"
-                class="text-osmu-purple no-underline font-bold bg-white py-2 px-5 rounded-lg text-lg flex items-center md:bg-osmu-purple md:text-white md:ml-2"
-            >
-                Browse the Wiki
-                <Icon name='right-caret'/>
+<body>
+    <!-- ── Nav ─────────────────────────────────────────────────────────── -->
+    <header class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-brand" aria-label="Open Source Miners United — home">
+                <Image src={osmuLogo} alt="OSMU" class="logo-light"/>
+                <Image src={osmuLogoDark} alt="OSMU" class="logo-dark"/>
             </a>
+
+            <nav class="nav-links" aria-label="Primary">
+                <a href="/osmu/about">About</a>
+                <a href="/bitaxe/about">Bitaxe</a>
+                <a href="/models">Models</a>
+                <a href="/tips/faq">FAQ</a>
+            </nav>
+
+            <div class="nav-actions">
+                <ThemeToggle />
+                <a href={links.donation} target="_blank" rel="noopener" class="btn btn-ghost">Support Us</a>
+                <a href="/osmu/about" class="btn btn-primary">
+                    <span class="cta-long">Browse the Wiki</span>
+                    <span class="cta-short">Wiki</span>
+                </a>
+            </div>
         </div>
-        <span class="col-span-2 bg-osmu-purple p-10 text-white md:col-span-3 md:col-start-1 md:justify-self-stretch flex md:py-16">
-            <span class="max-w-2xl mx-auto">
-                At OSMU, everyone with an interest in bitcoin and mining, comes together to share their knowledge, expertise or time. It’s the spot for finding the information you need or the friends you want. Come and join us at our <a href={links.discordInvite}>Discord server</a>.
-            </span>
-        </span>
-    </section>
-    <section class="m-10 flex flex-col gap-20 max-w-2xl md:mx-auto md:my-32 md:gap-28">
-        <ArgumentSection title='open' image={{ src: padlock, alt: "A padlock whose shackle is broken."}}>
-            Everyone can contribute and every contribution profits everyone.
-        </ArgumentSection>
-        <ArgumentSection title='brainy' image={{ src: bitcoinHead, alt: "A head with the bitcoin logo as its brain."}} flip>
-            Gathering people and everything they know at one spot makes OSMU the ultimate library of skill and knowledge.
-        </ArgumentSection>
-        <ArgumentSection title='together' image={{ src: communityBubbles, alt: "Multiple profile pictures from members of the discord server arranged in bubbles."}}>
-            Find like-minded people or learn from new friends.
-        </ArgumentSection>
-    </section>
-</main>
-<footer class="bg-osmu-purple text-white font-osmu p-5 text-base flex flex-col gap-3 shadow-inner md:flex-row-reverse md:justify-between md:items-center">
-    <ul class="list-none flex justify-start w-full gap-3 m-0 p-0 md:w-auto">
-        <li><a href="/osmu/about">wiki</a></li>
-        <li><a href="https://github.com/bitaxeorg/osmu-wiki" target="_blank">github</a></li>
-        <li><a href={links.discordInvite} target="_blank" target="_blank">discord</a></li>
-        <li><a href={links.donation} target="_blank" target="_blank">donation</a></li>
-    </ul>
-    <cite class="font-mono text-gray-300 text-sm">Closed Source is Antithetical to Bitcoin</cite>
-</footer>
+    </header>
+
+    <main>
+        <!-- ── Hero ────────────────────────────────────────────────────── -->
+        <section class="hero">
+            <div class="hero-grid" aria-hidden="true"></div>
+
+            <div class="hero-inner">
+                <div class="hero-copy">
+                    <span class="eyebrow">
+                        <span class="eyebrow-dot" aria-hidden="true"></span>
+                        Open Source Miners United
+                    </span>
+
+                    <h1>The origin of every big <span class="grad">open source mining</span> project.</h1>
+
+                    <p class="lede">
+                        Documentation, build guides and hard-won knowledge for open-source Bitcoin
+                        mining hardware — written by the people who designed it.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="/osmu/about" class="btn btn-primary btn-lg">
+                            Browse the Wiki
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </a>
+                        <a href={links.discordInvite} target="_blank" rel="noopener" class="btn btn-outline btn-lg">
+                            Join the Discord
+                        </a>
+                    </div>
+
+                    <dl class="stats">
+                        <div class="stat"><dt>39</dt><dd>Wiki pages</dd></div>
+                        <div class="stat"><dt>13</dt><dd>Project sections</dd></div>
+                        <div class="stat"><dt>2023</dt><dd>Founded</dd></div>
+                        <div class="stat"><dt>100%</dt><dd>Open source</dd></div>
+                    </dl>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-glow" aria-hidden="true"></div>
+                    <Image
+                        src={heroImage} alt="A render of the Bitaxe and its schematic behind it."
+                        class="hero-image" loading="eager"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Values ──────────────────────────────────────────────────── -->
+        <section class="section">
+            <div class="container">
+                <header class="section-head">
+                    <h2>Why OSMU</h2>
+                    <p>Three things everything here is built on.</p>
+                </header>
+
+                <div class="arguments">
+                    <ArgumentSection title='open' image={{ src: padlock, alt: "A padlock whose shackle is broken."}}>
+                        Everyone can contribute and every contribution profits everyone.
+                    </ArgumentSection>
+                    <ArgumentSection title='brainy' image={{ src: bitcoinHead, alt: "A head with the bitcoin logo as its brain."}} flip>
+                        Gathering people and everything they know at one spot makes OSMU the ultimate library of skill and knowledge.
+                    </ArgumentSection>
+                    <ArgumentSection title='together' image={{ src: communityBubbles, alt: "Multiple profile pictures from members of the discord server arranged in bubbles."}}>
+                        Find like-minded people or learn from new friends.
+                    </ArgumentSection>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Wiki sections ───────────────────────────────────────────── -->
+        <section class="section section-alt">
+            <div class="container">
+                <header class="section-head">
+                    <h2>Explore the wiki</h2>
+                    <p>Every project, documented and maintained by the community.</p>
+                </header>
+
+                <div class="card-grid">
+                    {sections.map((s) => (
+                        <a href={s.href} class:list={["project-card", { featured: s.featured }]}>
+                            <div class="project-top">
+                                <h3>{s.name}</h3>
+                                <span class="badge">{s.pages} {s.pages === 1 ? "page" : "pages"}</span>
+                            </div>
+                            <p>{s.blurb}</p>
+                            <span class="project-link">
+                                Read the docs
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                            </span>
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Community ───────────────────────────────────────────────── -->
+        <section class="section">
+            <div class="container">
+                <div class="cta">
+                    <div class="cta-glow" aria-hidden="true"></div>
+                    <h2>Come and join us</h2>
+                    <p>
+                        At OSMU, everyone with an interest in bitcoin and mining, comes together to share their knowledge, expertise or time. It’s the spot for finding the information you need or the friends you want. Come and join us at our <a href={links.discordInvite} target="_blank" rel="noopener">Discord server</a>.
+                    </p>
+                    <div class="cta-actions">
+                        <a href={links.discordInvite} target="_blank" rel="noopener" class="btn btn-primary btn-lg">Join the Discord</a>
+                        <a href={links.donation} target="_blank" rel="noopener" class="btn btn-outline btn-lg">Support Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── Footer ──────────────────────────────────────────────────────── -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <Image src={osmuLogo} alt="OSMU" class="logo-light"/>
+                <Image src={osmuLogoDark} alt="OSMU" class="logo-dark"/>
+                <cite>Closed Source is Antithetical to Bitcoin</cite>
+            </div>
+
+            <nav class="footer-links" aria-label="Footer">
+                <a href="/osmu/about">wiki</a>
+                <a href="https://github.com/bitaxeorg/osmu-wiki" target="_blank" rel="noopener">github</a>
+                <a href={links.discordInvite} target="_blank" rel="noopener">discord</a>
+                <a href={links.donation} target="_blank" rel="noopener">donation</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
+
+<style>
+    /* ── Base ─────────────────────────────────────────────────────────── */
+    /* The shared tailwind.css pulls in Tailwind's theme and utilities but not its
+       preflight, so these standalone pages need their own border-box rule. */
+    :global(*),
+    :global(*::before),
+    :global(*::after) {
+        box-sizing: border-box;
+    }
+
+    :global(html) {
+        scroll-behavior: smooth;
+    }
+
+    :global(body) {
+        margin: 0;
+        background: var(--osmu-bg);
+        color: var(--osmu-text-secondary);
+        font-family: var(--osmu-font-body);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        width: 100%;
+        max-width: var(--osmu-max-width);
+        margin-inline: auto;
+        padding-inline: 1.5rem;
+    }
+
+    /* One wordmark per theme — the brand purple is unreadable on near-black. */
+    .logo-light,
+    .logo-dark {
+        height: 2.1rem;
+        width: auto;
+    }
+    .logo-dark { display: none; }
+    :global(:root[data-theme='dark']) .logo-light { display: none; }
+    :global(:root[data-theme='dark']) .logo-dark { display: block; }
+
+    /* ── Buttons ──────────────────────────────────────────────────────── */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.15rem;
+        border-radius: var(--osmu-radius-full);
+        font-family: var(--osmu-font-display);
+        font-weight: 600;
+        font-size: 0.925rem;
+        text-decoration: none;
+        white-space: nowrap;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: transform 0.2s var(--osmu-ease), background-color 0.2s var(--osmu-ease),
+            border-color 0.2s var(--osmu-ease), box-shadow 0.2s var(--osmu-ease),
+            color 0.2s var(--osmu-ease);
+    }
+
+    .btn svg {
+        width: 1.05em;
+        height: 1.05em;
+        transition: transform 0.2s var(--osmu-ease);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn:hover svg { transform: translateX(3px); }
+
+    .btn-lg {
+        padding: 0.85rem 1.6rem;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        background: var(--osmu-accent);
+        color: var(--osmu-accent-contrast);
+        box-shadow: 0 6px 20px var(--osmu-accent-ring);
+    }
+    .btn-primary:hover {
+        background: var(--osmu-accent-strong);
+        box-shadow: 0 10px 30px var(--osmu-accent-ring);
+    }
+
+    .btn-outline {
+        border-color: var(--osmu-border-strong);
+        color: var(--osmu-text);
+        background: var(--osmu-surface);
+    }
+    .btn-outline:hover {
+        border-color: var(--osmu-accent);
+        color: var(--osmu-accent);
+    }
+
+    .btn-ghost {
+        color: var(--osmu-text-secondary);
+        border-color: var(--osmu-border);
+    }
+    .btn-ghost:hover {
+        color: var(--osmu-text);
+        border-color: var(--osmu-border-strong);
+    }
+
+    /* ── Nav ──────────────────────────────────────────────────────────── */
+    .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: color-mix(in srgb, var(--osmu-bg) 82%, transparent);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--osmu-border);
+    }
+
+    .nav-inner {
+        max-width: var(--osmu-max-width);
+        margin-inline: auto;
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .nav-brand {
+        display: inline-flex;
+        text-decoration: none;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .nav-links {
+        display: none;
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        color: var(--osmu-text-secondary);
+        text-decoration: none;
+        font-size: 0.925rem;
+        font-weight: 500;
+        transition: color 0.2s var(--osmu-ease);
+    }
+
+    .nav-links a:hover { color: var(--osmu-text); }
+
+    .nav-actions {
+        margin-inline-start: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .nav-actions .btn-ghost { display: none; }
+
+    @media (min-width: 900px) {
+        .nav-links { display: flex; }
+        .nav-actions .btn-ghost { display: inline-flex; }
+    }
+
+    /* The wordmark is wide; below this the bar would overflow the viewport. */
+    .cta-short { display: none; }
+
+    @media (max-width: 639px) {
+        .nav-inner {
+            gap: 0.75rem;
+            padding-inline: 1rem;
+        }
+
+        .logo-light,
+        .logo-dark { height: 1.6rem; }
+
+        .nav-actions .btn {
+            padding: 0.5rem 0.95rem;
+            font-size: 0.875rem;
+        }
+
+        .cta-long { display: none; }
+        .cta-short { display: inline; }
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────────────── */
+    .hero {
+        position: relative;
+        overflow: hidden;
+        background: var(--osmu-hero-wash);
+        border-bottom: 1px solid var(--osmu-border);
+    }
+
+    .hero-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(var(--osmu-grid-line) 1px, transparent 1px),
+            linear-gradient(90deg, var(--osmu-grid-line) 1px, transparent 1px);
+        background-size: 3.5rem 3.5rem;
+        mask-image: radial-gradient(70% 60% at 50% 30%, #000 40%, transparent 100%);
+        -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, #000 40%, transparent 100%);
+        pointer-events: none;
+    }
+
+    .hero-inner {
+        position: relative;
+        max-width: var(--osmu-max-width);
+        margin-inline: auto;
+        padding: 3.5rem 1.5rem 3rem;
+        display: grid;
+        gap: 2.5rem;
+        align-items: center;
+    }
+
+    @media (min-width: 1000px) {
+        .hero-inner {
+            grid-template-columns: 1.05fr 0.95fr;
+            padding-block: 6rem 5rem;
+            gap: 3rem;
+        }
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: var(--osmu-radius-full);
+        border: 1px solid var(--osmu-border);
+        background: var(--osmu-accent-surface);
+        color: var(--osmu-accent);
+        font-family: var(--osmu-font-display);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 50%;
+        background: var(--osmu-accent);
+        box-shadow: 0 0 0 3px var(--osmu-accent-surface);
+    }
+
+    .hero h1 {
+        font-family: var(--osmu-font-display);
+        color: var(--osmu-text);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        font-size: clamp(2.25rem, 5.5vw, 3.85rem);
+        margin: 1.25rem 0 0;
+        text-wrap: balance;
+    }
+
+    .grad {
+        background: linear-gradient(
+            100deg,
+            var(--osmu-accent) 0%,
+            var(--osmu-accent-strong) 45%,
+            var(--osmu-bitcoin) 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .lede {
+        margin: 1.25rem 0 0;
+        font-size: 1.075rem;
+        line-height: 1.65;
+        max-width: 34rem;
+        color: var(--osmu-text-secondary);
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem 2rem;
+        margin: 2.5rem 0 0;
+        padding: 1.75rem 0 0;
+        border-top: 1px solid var(--osmu-border);
+        max-width: 32rem;
+    }
+
+    @media (min-width: 640px) {
+        .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    .stat dt {
+        font-family: var(--osmu-font-display);
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: var(--osmu-text);
+        letter-spacing: -0.02em;
+    }
+
+    .stat dd {
+        margin: 0.15rem 0 0;
+        font-size: 0.78rem;
+        color: var(--osmu-text-muted);
+        letter-spacing: 0.02em;
+    }
+
+    .hero-visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-glow {
+        position: absolute;
+        inset: 10% 5%;
+        background: radial-gradient(circle at 50% 50%, var(--osmu-accent-ring), transparent 65%);
+        filter: blur(40px);
+        pointer-events: none;
+    }
+
+    .hero-image {
+        position: relative;
+        width: 100%;
+        max-width: 32rem;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.35));
+    }
+
+    /* ── Sections ─────────────────────────────────────────────────────── */
+    .section { padding-block: 4.5rem; }
+
+    @media (min-width: 768px) {
+        .section { padding-block: 6rem; }
+    }
+
+    .section-alt {
+        background: var(--osmu-bg-subtle);
+        border-block: 1px solid var(--osmu-border);
+    }
+
+    .section-head {
+        text-align: center;
+        max-width: 42rem;
+        margin: 0 auto 3rem;
+    }
+
+    .section-head h2 {
+        font-family: var(--osmu-font-display);
+        color: var(--osmu-text);
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin: 0;
+    }
+
+    .section-head p {
+        margin: 0.75rem 0 0;
+        color: var(--osmu-text-muted);
+        font-size: 1.05rem;
+    }
+
+    /* ── Argument sections ────────────────────────────────────────────── */
+    .arguments {
+        display: flex;
+        flex-direction: column;
+        gap: 3.5rem;
+        max-width: 52rem;
+        margin-inline: auto;
+    }
+
+    @media (min-width: 768px) {
+        .arguments { gap: 4.5rem; }
+    }
+
+    /* ── Project cards ────────────────────────────────────────────────── */
+    .card-grid {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+    }
+
+    .project-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.6rem;
+        border-radius: var(--osmu-radius-lg);
+        border: 1px solid var(--osmu-border);
+        background: var(--osmu-surface);
+        color: var(--osmu-text-secondary);
+        text-decoration: none;
+        box-shadow: var(--osmu-shadow-sm);
+        transition: transform 0.25s var(--osmu-ease), border-color 0.25s var(--osmu-ease),
+            box-shadow 0.25s var(--osmu-ease);
+    }
+
+    .project-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--osmu-accent-muted);
+        box-shadow: var(--osmu-shadow);
+    }
+
+    .project-card.featured {
+        border-color: var(--osmu-accent-muted);
+        background:
+            linear-gradient(180deg, var(--osmu-accent-surface), transparent 55%),
+            var(--osmu-surface);
+    }
+
+    .project-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+    }
+
+    .project-card h3 {
+        font-family: var(--osmu-font-display);
+        color: var(--osmu-text);
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: -0.01em;
+    }
+
+    .badge {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--osmu-text-muted);
+        border: 1px solid var(--osmu-border);
+        border-radius: var(--osmu-radius-full);
+        padding: 0.2rem 0.6rem;
+        white-space: nowrap;
+    }
+
+    .project-card p {
+        margin: 0;
+        font-size: 0.925rem;
+        line-height: 1.65;
+        flex: 1;
+    }
+
+    .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: var(--osmu-accent);
+        font-family: var(--osmu-font-display);
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    .project-link svg {
+        width: 1em;
+        height: 1em;
+        transition: transform 0.2s var(--osmu-ease);
+    }
+
+    .project-card:hover .project-link svg { transform: translateX(3px); }
+
+    /* ── CTA ──────────────────────────────────────────────────────────── */
+    .cta {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        padding: 3.5rem 1.75rem;
+        border-radius: var(--osmu-radius-lg);
+        border: 1px solid var(--osmu-border);
+        background:
+            radial-gradient(40rem 20rem at 50% -20%, var(--osmu-accent-surface), transparent 70%),
+            var(--osmu-surface);
+        box-shadow: var(--osmu-shadow);
+    }
+
+    @media (min-width: 768px) {
+        .cta { padding: 4.5rem 3rem; }
+    }
+
+    .cta-glow {
+        position: absolute;
+        inset-inline: 20%;
+        top: -6rem;
+        height: 12rem;
+        background: radial-gradient(circle, var(--osmu-accent-ring), transparent 70%);
+        filter: blur(50px);
+        pointer-events: none;
+    }
+
+    .cta h2 {
+        position: relative;
+        font-family: var(--osmu-font-display);
+        color: var(--osmu-text);
+        font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin: 0 0 1rem;
+    }
+
+    .cta p {
+        position: relative;
+        margin: 0 auto;
+        max-width: 42rem;
+        font-size: 1.05rem;
+        line-height: 1.75;
+    }
+
+    .cta p a {
+        color: var(--osmu-accent);
+        font-weight: 600;
+        text-decoration: none;
+        border-bottom: 1px solid var(--osmu-accent-ring);
+        transition: border-color 0.2s var(--osmu-ease);
+    }
+
+    .cta p a:hover { border-bottom-color: var(--osmu-accent); }
+
+    .cta-actions {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    /* ── Footer ───────────────────────────────────────────────────────── */
+    .footer {
+        border-top: 1px solid var(--osmu-border);
+        background: var(--osmu-bg-subtle);
+        padding-block: 2.5rem;
+    }
+
+    .footer-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    @media (min-width: 700px) {
+        .footer-inner {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .footer-brand cite {
+        font-family: var(--osmu-font-mono);
+        font-style: normal;
+        font-size: 0.8rem;
+        color: var(--osmu-text-muted);
+    }
+
+    .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    .footer-links a {
+        color: var(--osmu-text-secondary);
+        text-decoration: none;
+        font-size: 0.925rem;
+        transition: color 0.2s var(--osmu-ease);
+    }
+
+    .footer-links a:hover { color: var(--osmu-accent); }
+
+    /* ── Focus visibility ─────────────────────────────────────────────── */
+    :where(a, button):focus-visible {
+        outline: 2px solid var(--osmu-accent);
+        outline-offset: 3px;
+        border-radius: var(--osmu-radius-sm);
+    }
+
+    /* ── Motion preference ────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+        :global(html) { scroll-behavior: auto; }
+        .btn,
+        .project-card,
+        .btn svg,
+        .project-link svg { transition: none; }
+        .btn:hover,
+        .project-card:hover { transform: none; }
+    }
+</style>

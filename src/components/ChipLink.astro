@@ -10,11 +10,40 @@ interface Props {
 const props = Astro.props
 ---
 
-<a 
-    href={ props.href } target="_blank"
-    class="flex items-center gap-1.5 border border-gray-500 rounded-full py-1 pl-2 pr-3 text-gray-500 dark:text-gray-300 hover:text-black hover:dark:text-white no-underline font-bold text-sm transition-colors"
->
+<a href={ props.href } target="_blank" rel="noopener" class="chip">
     <Icon name={ props.icon }></Icon>
-    <div class="self-stretch w-px bg-gray-500 my-0.5"></div>
+    <span class="divider" aria-hidden="true"></span>
     { props.label }
 </a>
+
+<style>
+    .chip {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.25rem 0.75rem 0.25rem 0.5rem;
+        border: 1px solid var(--osmu-border-strong);
+        border-radius: var(--osmu-radius-full);
+        background: var(--osmu-surface);
+        color: var(--osmu-text-secondary);
+        font-size: 0.8125rem;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 0.2s var(--osmu-ease), border-color 0.2s var(--osmu-ease),
+            background-color 0.2s var(--osmu-ease);
+    }
+
+    .chip:hover {
+        color: var(--osmu-accent);
+        border-color: var(--osmu-accent-muted);
+        background: var(--osmu-surface-hover);
+    }
+
+    .divider {
+        align-self: stretch;
+        width: 1px;
+        margin-block: 0.125rem;
+        background: var(--osmu-border-strong);
+    }
+</style>

@@ -1,57 +1,44 @@
 ---
 import "../tailwind.css"
+import ThemeInit from "../components/homepage/ThemeInit.astro"
+import ThemeToggle from "../components/homepage/ThemeToggle.astro"
 ---
 
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitaxe Models</title>
-    <link rel="icon" href="favicon.svg" type="image/svg">
-    <style>
-        body {
-            margin: 0;
-            background: #1a1a2e;
-            color: #e0e0e0;
-            font-family: monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem 1rem;
-            gap: 3rem;
-        }
-
-        .model {
-            text-align: center;
-        }
-
-        .model pre {
-            font-size: clamp(0.35rem, 1.5vw, 0.85rem);
-            line-height: 1.2;
-            letter-spacing: 0.05em;
-            color: #c084fc;
-            margin: 0;
-        }
-
-        .model .name {
-            font-size: 1.2rem;
-            color: #a855f7;
-            margin-top: 0.75rem;
-            font-weight: bold;
-        }
-
-        h1 {
-            color: #a855f7;
-            font-size: 2rem;
-            margin: 0;
-        }
-    </style>
+    <meta name="description" content="Every Bitaxe model, from the 100 Max through to the 800 Gamma Turbo."/>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <ThemeInit />
 </head>
-<body>
-    <h1>⛏ Bitaxe Models</h1>
 
-    <div class="model">
-        <pre>{`
+<body>
+<header class="topbar">
+    <div class="topbar-inner">
+        <a href="/" class="back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            Home
+        </a>
+        <div class="topbar-actions">
+            <ThemeToggle />
+            <a href="/bitaxe/about" class="btn">Bitaxe wiki</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="intro">
+        <span class="eyebrow">Open Source Miners United</span>
+        <h1>Bitaxe Models</h1>
+        <p>Every generation of the open-source standalone miner, in order.</p>
+    </div>
+
+    <div class="grid">
+    <a href="/bitaxe/100" class="model">
+        <pre aria-hidden="true">{`
  ██╗ ██████╗  ██████╗
 ███║██╔═████╗██╔═████╗
 ╚██║██║██╔██║██║██╔██║
@@ -60,10 +47,11 @@ import "../tailwind.css"
  ╚═╝ ╚═════╝  ╚═════╝
         `}</pre>
         <div class="name">Max</div>
-    </div>
+        <span class="model-link">Read the docs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-    <div class="model">
-        <pre>{`
+    <a href="/bitaxe/200" class="model">
+        <pre aria-hidden="true">{`
 ██████╗  ██████╗  ██████╗
 ╚════██╗██╔═████╗██╔═████╗
  █████╔╝██║██╔██║██║██╔██║
@@ -72,10 +60,11 @@ import "../tailwind.css"
 ╚══════╝ ╚═════╝  ╚═════╝
         `}</pre>
         <div class="name">Ultra</div>
-    </div>
+        <span class="model-link">Read the docs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-    <div class="model">
-        <pre>{`
+    <a href="/bitaxe/300" class="model">
+        <pre aria-hidden="true">{`
 ██████╗  ██████╗  ██████╗
 ╚════██╗██╔═████╗██╔═████╗
  █████╔╝██║██╔██║██║██╔██║
@@ -84,10 +73,11 @@ import "../tailwind.css"
 ╚═════╝  ╚═════╝  ╚═════╝
         `}</pre>
         <div class="name">Ultra Hex</div>
-    </div>
+        <span class="model-link">Read the docs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-    <div class="model">
-        <pre>{`
+    <a href="/bitaxe/400" class="model">
+        <pre aria-hidden="true">{`
 ██╗  ██╗ ██████╗  ██████╗
 ██║  ██║██╔═████╗██╔═████╗
 ███████║██║██╔██║██║██╔██║
@@ -96,10 +86,11 @@ import "../tailwind.css"
      ╚═╝ ╚═════╝  ╚═════╝
         `}</pre>
         <div class="name">Supra</div>
-    </div>
+        <span class="model-link">Read the docs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-    <div class="model">
-        <pre>{`
+    <a href="/bitaxe/600" class="model">
+        <pre aria-hidden="true">{`
  ██████╗  ██████╗  ██████╗
 ██╔════╝ ██╔═████╗██╔═████╗
 ███████╗ ██║██╔██║██║██╔██║
@@ -108,10 +99,11 @@ import "../tailwind.css"
  ╚═════╝  ╚═════╝  ╚═════╝
         `}</pre>
         <div class="name">Gamma</div>
-    </div>
+        <span class="model-link">Read the docs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
-    <div class="model">
-        <pre>{`
+    <a href="/bitaxe/650" class="model">
+        <pre aria-hidden="true">{`
  ██████╗ ███████╗ ██████╗
 ██╔════╝ ██╔════╝██╔═████╗
 ███████╗ ███████╗██║██╔██║
@@ -120,10 +112,11 @@ import "../tailwind.css"
  ╚═════╝ ╚══════╝ ╚═════╝
         `}</pre>
         <div class="name">Gamma Duo</div>
-    </div>
+        <span class="model-link">Read the docs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
 
     <div class="model">
-        <pre>{`
+        <pre aria-hidden="true">{`
 ███████╗ ██████╗  ██████╗
 ╚════██║██╔═████╗██╔═████╗
     ██╔╝██║██╔██║██║██╔██║
@@ -132,10 +125,11 @@ import "../tailwind.css"
    ╚═╝   ╚═════╝  ╚═════╝
         `}</pre>
         <div class="name">Supra Hex</div>
+        <span class="model-link muted">No wiki page yet</span>
     </div>
 
-    <div class="model">
-        <pre>{`
+    <a href="/bitaxe/800" class="model">
+        <pre aria-hidden="true">{`
  █████╗  ██████╗  ██████╗
 ██╔══██╗██╔═████╗██╔═████╗
 ╚█████╔╝██║██╔██║██║██╔██║
@@ -144,6 +138,228 @@ import "../tailwind.css"
  ╚════╝  ╚═════╝  ╚═════╝
         `}</pre>
         <div class="name">Gamma Turbo</div>
+        <span class="model-link">Read the docs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+
     </div>
+</main>
+
+<footer class="foot">
+    <a href="/osmu/about">wiki</a>
+    <a href="https://github.com/bitaxeorg/osmu-wiki" target="_blank" rel="noopener">github</a>
+</footer>
 </body>
 </html>
+
+<style>
+    /* The shared tailwind.css pulls in Tailwind's theme and utilities but not its
+       preflight, so these standalone pages need their own border-box rule. */
+    :global(*),
+    :global(*::before),
+    :global(*::after) {
+        box-sizing: border-box;
+    }
+
+    :global(body) {
+        margin: 0;
+        background: var(--osmu-bg);
+        color: var(--osmu-text-secondary);
+        font-family: var(--osmu-font-body);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* -- Top bar -- */
+    .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: color-mix(in srgb, var(--osmu-bg) 82%, transparent);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--osmu-border);
+    }
+
+    .topbar-inner {
+        max-width: var(--osmu-max-width);
+        margin-inline: auto;
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: var(--osmu-text-secondary);
+        text-decoration: none;
+        font-family: var(--osmu-font-display);
+        font-weight: 600;
+        font-size: 0.925rem;
+        transition: color 0.2s var(--osmu-ease);
+    }
+
+    .back svg { width: 1.05em; height: 1.05em; }
+    .back:hover { color: var(--osmu-accent); }
+
+    .topbar-actions {
+        margin-inline-start: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.55rem 1.1rem;
+        border-radius: var(--osmu-radius-full);
+        background: var(--osmu-accent);
+        color: var(--osmu-accent-contrast);
+        font-family: var(--osmu-font-display);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+        box-shadow: 0 6px 20px var(--osmu-accent-ring);
+        transition: background-color 0.2s var(--osmu-ease), transform 0.2s var(--osmu-ease);
+    }
+
+    .btn:hover {
+        background: var(--osmu-accent-strong);
+        transform: translateY(-2px);
+    }
+
+    /* -- Intro -- */
+    main {
+        max-width: var(--osmu-max-width);
+        margin-inline: auto;
+        padding: 3.5rem 1.5rem 4.5rem;
+    }
+
+    .intro {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .eyebrow {
+        display: inline-block;
+        padding: 0.35rem 0.85rem;
+        border-radius: var(--osmu-radius-full);
+        border: 1px solid var(--osmu-border);
+        background: var(--osmu-accent-surface);
+        color: var(--osmu-accent);
+        font-family: var(--osmu-font-display);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .intro h1 {
+        font-family: var(--osmu-font-display);
+        color: var(--osmu-text);
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin: 1rem 0 0.5rem;
+    }
+
+    .intro p {
+        margin: 0;
+        color: var(--osmu-text-muted);
+        font-size: 1.05rem;
+    }
+
+    /* -- Model cards -- */
+    .grid {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    }
+
+    .model {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 2rem 1.25rem 1.5rem;
+        border-radius: var(--osmu-radius-lg);
+        border: 1px solid var(--osmu-border);
+        background: var(--osmu-surface);
+        box-shadow: var(--osmu-shadow-sm);
+        text-decoration: none;
+        transition: transform 0.25s var(--osmu-ease), border-color 0.25s var(--osmu-ease),
+            box-shadow 0.25s var(--osmu-ease);
+    }
+
+    a.model:hover {
+        transform: translateY(-4px);
+        border-color: var(--osmu-accent-muted);
+        box-shadow: var(--osmu-shadow);
+    }
+
+    .model pre {
+        margin: 0;
+        font-family: var(--osmu-font-mono);
+        font-size: clamp(0.4rem, 1.6vw, 0.8rem);
+        line-height: 1.2;
+        letter-spacing: 0.05em;
+        color: var(--osmu-accent);
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .model .name {
+        font-family: var(--osmu-font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--osmu-text);
+        letter-spacing: -0.01em;
+    }
+
+    .model-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: auto;
+        color: var(--osmu-accent);
+        font-family: var(--osmu-font-display);
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+
+    .model-link.muted { color: var(--osmu-text-muted); }
+    .model-link svg { width: 1em; height: 1em; transition: transform 0.2s var(--osmu-ease); }
+    a.model:hover .model-link svg { transform: translateX(3px); }
+
+    /* -- Footer -- */
+    .foot {
+        border-top: 1px solid var(--osmu-border);
+        background: var(--osmu-bg-subtle);
+        padding: 1.75rem 1.5rem;
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+    }
+
+    .foot a {
+        color: var(--osmu-text-secondary);
+        text-decoration: none;
+        font-size: 0.925rem;
+        transition: color 0.2s var(--osmu-ease);
+    }
+
+    .foot a:hover { color: var(--osmu-accent); }
+
+    :where(a, button):focus-visible {
+        outline: 2px solid var(--osmu-accent);
+        outline-offset: 3px;
+        border-radius: var(--osmu-radius-sm);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .model, .btn, .model-link svg { transition: none; }
+        a.model:hover, .btn:hover { transform: none; }
+    }
+</style>

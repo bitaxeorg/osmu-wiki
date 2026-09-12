@@ -13,10 +13,98 @@ interface Props {
 const { title, image, flip } = Astro.props as Props
 ---
 
-<article class="grid grid-cols-2 grid-rows-[1fr_auto] md:grid-rows-2 gap-5 text-lg items-center">
-    <h2 class="text-osmu-purple text-4xl font-bold row-start-1 mx-5 md:self-end md:m-0" class:list={{"col-start-2 justify-self-end": flip}}>{title}</h2>
-    <Image {...image} class="w-32 md:w-52 h-auto row-start-1 mx-5 md:mx-0 md:row-span-2" class:list={{"justify-self-end": !flip}}/>
-    <span class="col-span-2 md:col-span-1 md:self-start" class:list={{"md:text-right": flip}}>
-        <slot/>
-    </span>
+<article class="argument" class:list={{ flip }}>
+    <div class="art">
+        <div class="art-glow" aria-hidden="true"></div>
+        <Image {...image} class="art-image"/>
+    </div>
+
+    <div class="copy">
+        <h3>{title}</h3>
+        <p><slot/></p>
+    </div>
 </article>
+
+<style>
+    .argument {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+        .argument {
+            grid-template-columns: 13rem 1fr;
+            gap: 3rem;
+        }
+
+        /* Mirror every other row so the column reads as a rhythm, not a list. */
+        .argument.flip {
+            grid-template-columns: 1fr 13rem;
+        }
+
+        .argument.flip .art { order: 2; }
+        .argument.flip .copy { text-align: right; }
+    }
+
+    .art {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 6.5rem;
+        aspect-ratio: 1;
+        border-radius: var(--osmu-radius-lg);
+        border: 1px solid var(--osmu-border);
+        background: var(--osmu-surface);
+        box-shadow: var(--osmu-shadow-sm);
+        overflow: hidden;
+        transition: transform 0.3s var(--osmu-ease), border-color 0.3s var(--osmu-ease),
+            box-shadow 0.3s var(--osmu-ease);
+    }
+
+    @media (min-width: 768px) {
+        .art { width: 13rem; }
+    }
+
+    .argument:hover .art {
+        transform: translateY(-4px);
+        border-color: var(--osmu-accent-muted);
+        box-shadow: var(--osmu-shadow);
+    }
+
+    .art-glow {
+        position: absolute;
+        inset: -20%;
+        background: radial-gradient(circle at 50% 40%, var(--osmu-accent-surface), transparent 65%);
+        pointer-events: none;
+    }
+
+    .art-image {
+        position: relative;
+        width: 62%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .copy h3 {
+        font-family: var(--osmu-font-display);
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        color: var(--osmu-accent);
+        margin: 0 0 0.5rem;
+    }
+
+    .copy p {
+        margin: 0;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--osmu-text-secondary);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .art { transition: none; }
+        .argument:hover .art { transform: none; }
+    }
+</style>

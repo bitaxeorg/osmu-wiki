@@ -6,11 +6,17 @@ import links from "./links";
 
 // https://astro.build/config
 export default defineConfig({
+  // Enables the sitemap Starlight ships with, and canonical URLs on every page.
+  site: "https://osmu.wiki",
   integrations: [
     starlight({
       title: "Wiki",
       logo: {
-        src: "./src/assets/osmu-logo.svg",
+        // Two variants so the wordmark keeps its contrast in both themes: the brand
+        // purple is too dark to read against the near-black dark-mode header.
+        light: "./src/assets/osmu-logo.svg",
+        dark: "./src/assets/osmu-logo-dark.svg",
+        replacesTitle: false,
       },
       social: [
         {

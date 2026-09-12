@@ -1,0 +1,168 @@
+/*
+ * OSMU design tokens
+ * ------------------
+ * One palette, two themes. Every colour used anywhere in the site resolves to a token
+ * defined here, so light and dark stay in step and a rebrand is a single-file change.
+ *
+ * Starlight drives theming from `:root[data-theme]`, so the tokens are declared for both
+ * themes and the Starlight `--sl-*` variables are mapped onto them at the bottom.
+ */
+
+/* ─── Dark (default) ───────────────────────────────────────────────────────── */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Surfaces, from furthest back to closest */
+  --osmu-bg: #0a0a10;
+  --osmu-bg-subtle: #0e0e16;
+  --osmu-surface: #14141e;
+  --osmu-surface-raised: #1a1a26;
+  --osmu-surface-hover: #20202e;
+
+  /* Lines */
+  --osmu-border: #262636;
+  --osmu-border-strong: #343449;
+
+  /* Text */
+  --osmu-text: #f5f5f8;
+  --osmu-text-secondary: #b9b7c7;
+  --osmu-text-muted: #8b88a0;
+
+  /* Brand violet — lifted from the original #6A59A3 so it stays legible on near-black */
+  --osmu-accent: #9d8cf0;
+  --osmu-accent-strong: #b3a5ff;
+  --osmu-accent-muted: #6d5cb8;
+  --osmu-accent-contrast: #0a0a10;
+  --osmu-accent-surface: rgba(157, 140, 240, 0.12);
+  --osmu-accent-ring: rgba(157, 140, 240, 0.35);
+
+  /* Bitcoin orange, used sparingly as a second voice */
+  --osmu-bitcoin: #f7a13a;
+  --osmu-bitcoin-surface: rgba(247, 161, 58, 0.12);
+
+  /* Depth */
+  --osmu-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --osmu-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  --osmu-shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --osmu-glow: 0 0 80px rgba(157, 140, 240, 0.18);
+
+  /* Decorative washes */
+  --osmu-hero-wash:
+    radial-gradient(60rem 40rem at 15% -10%, rgba(157, 140, 240, 0.18), transparent 60%),
+    radial-gradient(45rem 35rem at 95% 10%, rgba(247, 161, 58, 0.10), transparent 60%);
+  --osmu-grid-line: rgba(255, 255, 255, 0.035);
+}
+
+/* ─── Light ────────────────────────────────────────────────────────────────── */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --osmu-bg: #fbfbfd;
+  --osmu-bg-subtle: #f4f4f8;
+  --osmu-surface: #ffffff;
+  --osmu-surface-raised: #ffffff;
+  --osmu-surface-hover: #f4f3f9;
+
+  --osmu-border: #e5e4ee;
+  --osmu-border-strong: #d2d0e0;
+
+  --osmu-text: #15141c;
+  --osmu-text-secondary: #4a4757;
+  --osmu-text-muted: #6b6879;
+
+  /* Darkened so it clears AA on white */
+  --osmu-accent: #5a49a8;
+  --osmu-accent-strong: #46387f;
+  --osmu-accent-muted: #8d7fd0;
+  --osmu-accent-contrast: #ffffff;
+  --osmu-accent-surface: rgba(90, 73, 168, 0.08);
+  --osmu-accent-ring: rgba(90, 73, 168, 0.28);
+
+  --osmu-bitcoin: #a35c05;
+  --osmu-bitcoin-surface: rgba(247, 147, 26, 0.12);
+
+  --osmu-shadow-sm: 0 1px 2px rgba(20, 19, 32, 0.06);
+  --osmu-shadow: 0 8px 30px rgba(20, 19, 32, 0.08);
+  --osmu-shadow-lg: 0 24px 60px rgba(20, 19, 32, 0.12);
+  --osmu-glow: 0 0 80px rgba(90, 73, 168, 0.10);
+
+  --osmu-hero-wash:
+    radial-gradient(60rem 40rem at 15% -10%, rgba(90, 73, 168, 0.10), transparent 60%),
+    radial-gradient(45rem 35rem at 95% 10%, rgba(247, 147, 26, 0.08), transparent 60%);
+  --osmu-grid-line: rgba(20, 19, 32, 0.045);
+}
+
+/* ─── Shared scales ────────────────────────────────────────────────────────── */
+:root {
+  --osmu-radius-sm: 0.5rem;
+  --osmu-radius: 0.875rem;
+  --osmu-radius-lg: 1.25rem;
+  --osmu-radius-full: 999px;
+
+  --osmu-font-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --osmu-font-body: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --osmu-font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas,
+    'Liberation Mono', monospace;
+
+  --osmu-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --osmu-max-width: 76rem;
+}
+
+/* ─── Map Starlight onto the tokens ────────────────────────────────────────────
+ * Starlight expects a --sl-color-white..black ramp where "white" is the highest
+ * contrast text colour for the current theme (so it inverts in light mode).
+ */
+:root,
+:root[data-theme='dark'] {
+  --sl-color-accent-low: var(--osmu-accent-surface);
+  --sl-color-accent: var(--osmu-accent);
+  --sl-color-accent-high: var(--osmu-accent-strong);
+
+  --sl-color-white: var(--osmu-text);
+  --sl-color-gray-1: #e6e4ef;
+  --sl-color-gray-2: var(--osmu-text-secondary);
+  --sl-color-gray-3: var(--osmu-text-muted);
+  --sl-color-gray-4: #56536a;
+  --sl-color-gray-5: var(--osmu-border-strong);
+  --sl-color-gray-6: var(--osmu-surface);
+  --sl-color-gray-7: var(--osmu-surface-raised);
+  --sl-color-black: var(--osmu-bg);
+
+  --sl-color-bg: var(--osmu-bg);
+  --sl-color-bg-nav: color-mix(in srgb, var(--osmu-bg) 85%, transparent);
+  --sl-color-bg-sidebar: var(--osmu-bg-subtle);
+  --sl-color-bg-inline-code: var(--osmu-surface-raised);
+  --sl-color-hairline: var(--osmu-border);
+  --sl-color-hairline-light: var(--osmu-border);
+  --sl-color-hairline-shade: var(--osmu-border);
+  --sl-color-text-accent: var(--osmu-accent);
+  --sl-color-text-invert: var(--osmu-accent-contrast);
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: var(--osmu-accent-surface);
+  --sl-color-accent: var(--osmu-accent);
+  --sl-color-accent-high: var(--osmu-accent-strong);
+
+  --sl-color-white: var(--osmu-text);
+  --sl-color-gray-1: #23222e;
+  --sl-color-gray-2: var(--osmu-text-secondary);
+  --sl-color-gray-3: var(--osmu-text-muted);
+  --sl-color-gray-4: #8b88a0;
+  --sl-color-gray-5: var(--osmu-border-strong);
+  --sl-color-gray-6: var(--osmu-bg-subtle);
+  --sl-color-gray-7: var(--osmu-surface);
+  --sl-color-black: var(--osmu-bg);
+
+  --sl-color-bg: var(--osmu-bg);
+  --sl-color-bg-nav: color-mix(in srgb, var(--osmu-bg) 85%, transparent);
+  --sl-color-bg-sidebar: var(--osmu-bg-subtle);
+  --sl-color-bg-inline-code: var(--osmu-bg-subtle);
+  --sl-color-hairline: var(--osmu-border);
+  --sl-color-hairline-light: var(--osmu-border);
+  --sl-color-hairline-shade: var(--osmu-border);
+  --sl-color-text-accent: var(--osmu-accent);
+  --sl-color-text-invert: var(--osmu-accent-contrast);
+}
