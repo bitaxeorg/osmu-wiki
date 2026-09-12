@@ -71,7 +71,7 @@ export default defineConfig({
             },
             {
               label: "801 / Gamma Turbo",
-              link: "/bitaxe/800",
+              link: "/bitaxe/801",
             },
             {
               label: "API",
