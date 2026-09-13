@@ -3,6 +3,7 @@ import starlight from "@astrojs/starlight";
 import tailwindv4 from "@tailwindcss/vite";
 import svelte from "@astrojs/svelte";
 import links from "./links";
+import rehypeWrapTables from "./src/plugins/rehype-wrap-tables.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -254,6 +255,11 @@ export default defineConfig({
     }),
     svelte(),
   ],
+  markdown: {
+    // Gives every table a scroll container to live in, so the frame around it
+    // and the box that scrolls are not the same element. See the plugin.
+    rehypePlugins: [rehypeWrapTables],
+  },
   vite: {
     plugins: [tailwindv4()],
   },

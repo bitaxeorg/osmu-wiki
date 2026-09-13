@@ -108,7 +108,7 @@ const sections = [
 </head>
 
 <body>
-    <!-- ── Nav ─────────────────────────────────────────────────────────── -->
+    <!-- Nav -->
     <header class="nav">
         <div class="nav-inner">
             <a href="/" class="nav-brand" aria-label="Open Source Miners United — home">
@@ -135,7 +135,7 @@ const sections = [
     </header>
 
     <main>
-        <!-- ── Hero ────────────────────────────────────────────────────── -->
+        <!-- Hero -->
         <section class="hero">
             <div class="hero-grid" aria-hidden="true"></div>
 
@@ -181,7 +181,7 @@ const sections = [
             </div>
         </section>
 
-        <!-- ── Values ──────────────────────────────────────────────────── -->
+        <!-- Values -->
         <section class="section">
             <div class="container">
                 <header class="section-head">
@@ -203,7 +203,7 @@ const sections = [
             </div>
         </section>
 
-        <!-- ── Wiki sections ───────────────────────────────────────────── -->
+        <!-- Wiki sections -->
         <section class="section section-alt">
             <div class="container">
                 <header class="section-head">
@@ -229,7 +229,7 @@ const sections = [
             </div>
         </section>
 
-        <!-- ── Community ───────────────────────────────────────────────── -->
+        <!-- Community -->
         <section class="section">
             <div class="container">
                 <div class="cta">
@@ -247,7 +247,7 @@ const sections = [
         </section>
     </main>
 
-    <!-- ── Footer ──────────────────────────────────────────────────────── -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-inner">
             <div class="footer-brand">
@@ -268,7 +268,7 @@ const sections = [
 </html>
 
 <style>
-    /* ── Base ─────────────────────────────────────────────────────────── */
+    /* Base */
     /* The shared tailwind.css pulls in Tailwind's theme and utilities but not its
        preflight, so these standalone pages need their own border-box rule. */
     :global(*),
@@ -307,7 +307,7 @@ const sections = [
     :global(:root[data-theme='dark']) .logo-light { display: none; }
     :global(:root[data-theme='dark']) .logo-dark { display: block; }
 
-    /* ── Buttons ──────────────────────────────────────────────────────── */
+    /* Buttons */
     .btn {
         display: inline-flex;
         align-items: center;
@@ -370,7 +370,7 @@ const sections = [
         border-color: var(--osmu-border-strong);
     }
 
-    /* ── Nav ──────────────────────────────────────────────────────────── */
+    /* Nav */
     .nav {
         position: sticky;
         top: 0;
@@ -447,7 +447,7 @@ const sections = [
         .cta-short { display: inline; }
     }
 
-    /* ── Hero ─────────────────────────────────────────────────────────── */
+    /* Hero */
     .hero {
         position: relative;
         overflow: hidden;
@@ -599,7 +599,7 @@ const sections = [
         filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.35));
     }
 
-    /* ── Sections ─────────────────────────────────────────────────────── */
+    /* Sections */
     .section { padding-block: 4.5rem; }
 
     @media (min-width: 768px) {
@@ -632,7 +632,7 @@ const sections = [
         font-size: 1.05rem;
     }
 
-    /* ── Argument sections ────────────────────────────────────────────── */
+    /* Argument sections */
     .arguments {
         display: flex;
         flex-direction: column;
@@ -645,7 +645,7 @@ const sections = [
         .arguments { gap: 4.5rem; }
     }
 
-    /* ── Project cards ────────────────────────────────────────────────── */
+    /* Project cards */
     .card-grid {
         display: grid;
         gap: 1.25rem;
@@ -733,7 +733,7 @@ const sections = [
 
     .project-card:hover .project-link svg { transform: translateX(3px); }
 
-    /* ── CTA ──────────────────────────────────────────────────────────── */
+    /* CTA */
     .cta {
         position: relative;
         overflow: hidden;
@@ -798,7 +798,7 @@ const sections = [
         margin-top: 2rem;
     }
 
-    /* ── Footer ───────────────────────────────────────────────────────── */
+    /* Footer */
     .footer {
         border-top: 1px solid var(--osmu-border);
         background: var(--osmu-bg-subtle);
@@ -848,14 +848,14 @@ const sections = [
 
     .footer-links a:hover { color: var(--osmu-accent); }
 
-    /* ── Focus visibility ─────────────────────────────────────────────── */
+    /* Focus visibility */
     :where(a, button):focus-visible {
         outline: 2px solid var(--osmu-accent);
         outline-offset: 3px;
         border-radius: var(--osmu-radius-sm);
     }
 
-    /* ── Motion preference ────────────────────────────────────────────── */
+    /* Motion preference */
     @media (prefers-reduced-motion: reduce) {
         :global(html) { scroll-behavior: auto; }
         .btn,
