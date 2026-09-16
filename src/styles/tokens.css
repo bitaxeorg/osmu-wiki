@@ -8,7 +8,7 @@
  * themes and the Starlight `--sl-*` variables are mapped onto them at the bottom.
  */
 
-/* ─── Dark (default) ───────────────────────────────────────────────────────── */
+/* Dark (default) */
 :root,
 :root[data-theme='dark'] {
   color-scheme: dark;
@@ -54,7 +54,7 @@
   --osmu-grid-line: rgba(255, 255, 255, 0.035);
 }
 
-/* ─── Light ────────────────────────────────────────────────────────────────── */
+/* Light */
 :root[data-theme='light'] {
   color-scheme: light;
 
@@ -93,7 +93,7 @@
   --osmu-grid-line: rgba(20, 19, 32, 0.045);
 }
 
-/* ─── Shared scales ────────────────────────────────────────────────────────── */
+/* Shared scales */
 :root {
   --osmu-radius-sm: 0.5rem;
   --osmu-radius: 0.875rem;
@@ -110,7 +110,7 @@
   --osmu-max-width: 76rem;
 }
 
-/* ─── Map Starlight onto the tokens ────────────────────────────────────────────
+/* Map Starlight onto the tokens
  * Starlight expects a --sl-color-white..black ramp where "white" is the highest
  * contrast text colour for the current theme (so it inverts in light mode).
  */

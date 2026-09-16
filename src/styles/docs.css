@@ -5,7 +5,7 @@
  * the shell around it — header, sidebar, table of contents, typography, code, cards.
  */
 
-/* ─── Shell ────────────────────────────────────────────────────────────────── */
+/* Shell */
 body {
   font-family: var(--osmu-font-body);
   background: var(--osmu-bg);
@@ -23,7 +23,7 @@ body {
   background-position: center top;
 }
 
-/* ─── Header ───────────────────────────────────────────────────────────────── */
+/* Header */
 .header {
   background: var(--sl-color-bg-nav);
   backdrop-filter: blur(14px);
@@ -75,7 +75,7 @@ site-search + * select {
   border-radius: var(--osmu-radius-full);
 }
 
-/* ─── Sidebar ──────────────────────────────────────────────────────────────── */
+/* Sidebar */
 .sidebar-pane {
   border-inline-end: 1px solid var(--osmu-border);
   background: var(--sl-color-bg-sidebar);
@@ -133,7 +133,7 @@ site-search + * select {
   background: var(--osmu-accent);
 }
 
-/* ─── Table of contents ────────────────────────────────────────────────────── */
+/* Table of contents */
 starlight-toc nav > h2 {
   font-family: var(--osmu-font-display);
   font-size: 0.72rem;
@@ -165,7 +165,7 @@ starlight-toc a[aria-current='true']:focus {
   font-weight: 600;
 }
 
-/* ─── Content typography ───────────────────────────────────────────────────── */
+/* Content typography */
 .sl-markdown-content {
   font-size: 1rem;
   line-height: 1.75;
@@ -236,18 +236,50 @@ starlight-toc a[aria-current='true']:focus {
   box-shadow: var(--osmu-shadow-sm);
 }
 
-.sl-markdown-content table {
-  border-radius: var(--osmu-radius);
-  overflow: hidden;
+/*
+ * The frame goes on the wrapper (see src/plugins/rehype-wrap-tables.mjs) and
+ * never on the table. Starlight ships `table { display: block; overflow: auto }`
+ * so the table is its own scroll box; bordering that same element stretches the
+ * frame to the full column width while the rows shrink-wrap inside it, and
+ * giving it `overflow: hidden` so the radius clips also clips any table too wide
+ * to fit instead of letting it scroll.
+ */
+.sl-markdown-content .table-scroll {
   border: 1px solid var(--osmu-border);
+  border-radius: var(--osmu-radius);
+  overflow-x: auto;
+}
+
+.sl-markdown-content .table-scroll > table {
+  display: table;
+  /* `width` makes a narrow table fill the frame; `min-width` lets a wide one
+     grow past it and scroll rather than being squeezed. */
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
   border-collapse: separate;
   border-spacing: 0;
-  width: 100%;
 }
 
 .sl-markdown-content :is(th, td) {
   border-bottom: 1px solid var(--osmu-border);
   padding: 0.7rem 0.9rem;
+}
+
+/*
+ * Starlight zeroes the outer padding of the first and last cells so an
+ * undecorated table lines up with the body text. Inside a frame that reads as
+ * the text touching the border, so put it back.
+ */
+.sl-markdown-content .table-scroll :is(th, td):first-child {
+  padding-inline-start: 0.9rem;
+}
+
+.sl-markdown-content .table-scroll :is(th, td):last-child {
+  padding-inline-end: 0.9rem;
 }
 
 .sl-markdown-content th {
@@ -267,12 +299,12 @@ starlight-toc a[aria-current='true']:focus {
   border-color: var(--osmu-border);
 }
 
-/* ─── Page title block ─────────────────────────────────────────────────────── */
+/* Page title block */
 .content-panel + .content-panel {
   border-top: 1px solid var(--osmu-border);
 }
 
-/* ─── Prev / next pagination ───────────────────────────────────────────────── */
+/* Prev / next pagination */
 .pagination-links a {
   border: 1px solid var(--osmu-border);
   background: var(--osmu-surface);
@@ -292,7 +324,7 @@ starlight-toc a[aria-current='true']:focus {
   color: var(--osmu-text);
 }
 
-/* ─── Cards / asides ───────────────────────────────────────────────────────── */
+/* Cards / asides */
 .card {
   border: 1px solid var(--osmu-border);
   background: var(--osmu-surface);
@@ -305,14 +337,14 @@ starlight-toc a[aria-current='true']:focus {
   border-inline-start-width: 3px;
 }
 
-/* ─── Focus visibility ─────────────────────────────────────────────────────── */
+/* Focus visibility */
 :where(a, button, summary, input, select):focus-visible {
   outline: 2px solid var(--osmu-accent);
   outline-offset: 2px;
   border-radius: var(--osmu-radius-sm);
 }
 
-/* ─── Motion preference ────────────────────────────────────────────────────── */
+/* Motion preference */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

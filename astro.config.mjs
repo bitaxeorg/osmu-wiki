@@ -3,6 +3,7 @@ import starlight from "@astrojs/starlight";
 import tailwindv4 from "@tailwindcss/vite";
 import svelte from "@astrojs/svelte";
 import links from "./links";
+import rehypeWrapTables from "./src/plugins/rehype-wrap-tables.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -254,6 +255,9 @@ export default defineConfig({
     }),
     svelte(),
   ],
+  markdown: {
+    rehypePlugins: [rehypeWrapTables],
+  },
   vite: {
     plugins: [tailwindv4()],
   },
