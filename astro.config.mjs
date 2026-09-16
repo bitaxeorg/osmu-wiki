@@ -256,8 +256,6 @@ export default defineConfig({
     svelte(),
   ],
   markdown: {
-    // Gives every table a scroll container to live in, so the frame around it
-    // and the box that scrolls are not the same element. See the plugin.
     rehypePlugins: [rehypeWrapTables],
   },
   vite: {

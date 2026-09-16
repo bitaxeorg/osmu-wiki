@@ -1,38 +1,15 @@
 /**
- * Wrap every Markdown table in a scroll container.
+ * Wrap every Markdown table in a scroll container, and drop a `<thead>` whose
+ * cells are all empty.
  *
- * Starlight makes the `<table>` itself the scrollable box:
+ * Starlight scrolls the `<table>` element itself (`display: block; overflow:
+ * auto`), so a decorated table draws its frame at full column width while the
+ * rows hug the left. The frame and the scroll box have to be separate
+ * elements; this adds the outer one so the table can stay `display: table`.
  *
- *     .sl-markdown-content table { display: block; overflow: auto; }
- *
- * That works while the table is undecorated, because a `display: block` table
- * lays its rows out in an anonymous table box that shrink-wraps the content and
- * nobody can see the difference. The moment the element gets a border, a
- * background or a radius, the frame stretches to the full column width while
- * the rows stay hugging the left — and any rule that replaces `overflow: auto`
- * to make the radius clip will also clip a wide table instead of scrolling it.
- *
- * The frame and the scroll container have to be two different boxes, so this
- * adds the second one. The table then goes back to being a real `display: table`
- * at `width: 100%`, which is what makes the cells fill the frame and the row
- * rules reach both edges.
- *
- * It also drops a header row that has nothing in it. Every ASIC page writes its
- * spec table headerless, which GitHub-flavoured Markdown spells as a row of
- * empty cells above the delimiter:
- *
- *     |                 |                |
- *     | --------------- | -------------- |
- *     | Price           | New: ~$unknown |
- *
- * There is no way to express "no header" in GFM, so the renderer emits an empty
- * `<thead>` either way. Undecorated that is a blank line nobody notices; with a
- * header background on it, it is a grey band across the top of the table that
- * reads as a rendering fault. Dropping it here keeps the Markdown idiom intact
- * rather than asking five pages to work around the stylesheet.
- *
- * Written as a plain tree walk rather than pulling in `unist-util-visit`: it is
- * a few dozen lines and this is the only place in the project that needs it.
+ * GFM has no way to spell "no header", so a headerless spec table still emits
+ * an empty `<thead>` — a grey band across the top once the header has a
+ * background.
  */
 export default function rehypeWrapTables() {
   return (tree) => wrap(tree)
@@ -49,9 +26,7 @@ function wrap(node) {
     if (child.tagName === 'table') {
       dropEmptyHead(child)
 
-      // Replace in place and do not descend: the table's own subtree holds no
-      // further tables, and recursing into the wrapper we just made would find
-      // this same table again.
+      // Do not descend: recursing into the wrapper would find this table again.
       children[i] = {
         type: 'element',
         tagName: 'div',
